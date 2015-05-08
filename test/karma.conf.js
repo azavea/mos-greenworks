@@ -26,9 +26,13 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
       'bower_components/angular-cookies/angular-cookies.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
-      "app/scripts/**/*.js",
+      "app/scripts/config.js",
+      "app/scripts/views/home/module.js",
+      "app/scripts/views/home/home-controller.js",
+      "app/scripts/app.js",
       "test/mock/**/*.js",
       "test/spec/**/*.js"
     ],
