@@ -1,0 +1,225 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="style.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="main.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,100,700' rel='stylesheet' type='text/css'>
+    </head>
+    <body class="mode-energy">
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">GreenWorks</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                       <!--  <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">Link</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul> -->
+                        <ul class="nav navbar-nav navbar-right">
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="input-group">
+                                    <input type="text" width="100" placeholder="Search address or neighborhood" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <aside class="sidebar">
+            <div class="sidebar-header mode-background">
+                <div class="sidebar-close hidden-explore">
+                    <i class="fa fa-times-circle"></i>
+                </div>
+                <div class="text">
+                    <h1 class="sidebar-heading">
+                        <div class="sidebar-heading-inner">
+                            <img class="mode-logo hidden-explore" src="/img/energy-logo.png" alt="">Energy
+                        </div>
+                    </h1>
+                    <div class="sidebar-text hidden-explore">City government energy usage rose in 2013 for the first time since 2007. As shown in the chart on the facing page, energy usage rises and falls with changes in weather.</div>
+                </div>
+            </div>
+            <div class="sidebar-inner hidden-explore">
+                <div class="sidebar-content">
+                    <h3 class="sidebar-content-heading mode-color">
+                        <span class="header-underline">
+                            Types of projects:
+                        </span>
+                    </h3>
+                    <div class="sidebar-content-text">
+                    <ul>
+                        <li>City LEED buildings</li>
+                        <li>Energy Efficiency Projects in City-Owned Buildings</li>
+                        <li>Energy-Efficient Affordable Housing</li>
+                        <li>EnergyWorks Commerical Loans</li>
+                        <li>Greenworks Small Business Loans</li>
+                        <li>Guaranteed Energy Savings Project</li>
+                        <li>Philadelphia International Airport Renewable Energy</li>
+                        <li>Philadelphia Water Department Renewable Energy</li>
+                        <li>Privately-Owned Solar Projects</li>
+                        <li>SEPTA Projects</li>
+                        <li>City LEED buildings</li>
+                        <li>Energy Efficiency Projects in City-Owned Buildings</li>
+                        <li>Energy-Efficient Affordable Housing</li>
+                        <li>EnergyWorks Commerical Loans</li>
+                        <li>Greenworks Small Business Loans</li>
+                        <li>Guaranteed Energy Savings Project</li>
+                        <li>Philadelphia International Airport Renewable Energy</li>
+                        <li>Philadelphia Water Department Renewable Energy</li>
+                        <li>Privately-Owned Solar Projects</li>
+                        <li>SEPTA Projects</li>
+                        <li>City LEED buildings</li>
+                        <li>Energy Efficiency Projects in City-Owned Buildings</li>
+                        <li>Energy-Efficient Affordable Housing</li>
+                        <li>EnergyWorks Commerical Loans</li>
+                        <li>Greenworks Small Business Loans</li>
+                        <li>Guaranteed Energy Savings Project</li>
+                        <li>Philadelphia International Airport Renewable Energy</li>
+                        <li>Philadelphia Water Department Renewable Energy</li>
+                        <li>Privately-Owned Solar Projects</li>
+                        <li>SEPTA Projects</li>
+                        <li>City LEED buildings</li>
+                        <li>Energy Efficiency Projects in City-Owned Buildings</li>
+                        <li>Energy-Efficient Affordable Housing</li>
+                        <li>EnergyWorks Commerical Loans</li>
+                        <li>Greenworks Small Business Loans</li>
+                        <li>Guaranteed Energy Savings Project</li>
+                        <li>Philadelphia International Airport Renewable Energy</li>
+                        <li>Philadelphia Water Department Renewable Energy</li>
+                        <li>Privately-Owned Solar Projects</li>
+                        <li>SEPTA Projects</li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-nav hidden-explore">
+                <div class="sidebar-nav-button sidebar-nav-prev"><i class="fa fa-angle-left button-icon"></i><span class="sidebar-nav-button-text hidden-explore">Home</span></div>
+                <div class="sidebar-nav-button sidebar-nav-next"><span class="sidebar-nav-button-text hidden-explore">Environment</span><i class="fa fa-angle-right button-icon"></i></div>
+            </div>
+        </aside>
+        <div class="filters">
+            <div class="filter-menu">
+                <div class="filter-header clearfix">
+                    <div class="filter-header-icon">
+                        <div class="filter-header-icon-container">
+                            <button type="button" class="filter-toggle vertical-align">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="filter-header-heading vertical-align">Filters</div>
+                    <div class="filter-header-button vertical-align">
+                        Reset | Clear
+                    </div>
+                </div>
+            </div>
+            <div class="filter mode-energy">
+                <div class="filter-header clearfix">
+                    <div class="filter-header-icon">
+                        <div class="filter-header-icon-container mode-background">
+                            <img class="mode-icon vertical-align" height="30" width="30" src="/img/energy-logo.png" alt="">
+                        </div>
+                    </div>
+                    <div class="filter-header-heading vertical-align">Energy</div>
+                    <div class="filter-header-button vertical-align">
+                        <i class="fa fa-angle-up button-icon"></i>
+                    </div>
+                </div>
+                <div class="filter-body">
+                    <div class="filter-subcategory">
+                        <div class="filter-subcategory-header">
+                            <div class="filter-subcategory-heading">City-Owned Buildings</div>
+                            <div class="filter-subcategory-marker">
+                                <div class="marker">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-subcategory-item">
+                            <div class="filter-subcategory-heading">Energy-Efficient Affordable Housing</div>
+                            <div class="filter-subcategory-marker">
+                                <div class="marker">
+                                    <i class="fa fa-file button-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-subcategory-item">
+                            <div class="filter-subcategory-heading">EnergyWorks Commercial Loans</div>
+                            <div class="filter-subcategory-marker">
+                                <div class="marker">
+                                    <i class="fa fa-file button-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-subcategory">
+                        <div class="filter-subcategory-header">
+                            <div class="filter-subcategory-heading">Privately-Owned Buildings</div>
+                            <div class="filter-subcategory-marker">
+                                <div class="marker">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-subcategory-item">
+                            <div class="filter-subcategory-heading">Energy-Efficient Affordable Housing</div>
+                            <div class="filter-subcategory-marker">
+                                <div class="marker">
+                                    <i class="fa fa-file button-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-subcategory-item">
+                            <div class="filter-subcategory-heading">EnergyWorks Commercial Loans</div>
+                            <div class="filter-subcategory-marker">
+                                <div class="marker">
+                                    <i class="fa fa-file button-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map" class="map"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
