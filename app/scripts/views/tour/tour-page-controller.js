@@ -5,8 +5,9 @@
      * Controller for the gw app tour sidebar page view
      */
     /* ngInject */
-    function TourPageController($log, $scope, $state, $stateParams, TourConfig) {
+    function TourPageController($log, $scope, $state, $stateParams, Config, TourConfig, Visualization) {
 
+        var vis = null;
         var popupContent = '' +
             '<div class="popup-left">' +
                '<div class="popup-image" style="background-image: url(http://placehold.it/350x150)">' +
@@ -42,6 +43,8 @@
 
             ctl.onPrevClick = onPrevClick;
             ctl.onNextClick = onNextClick;
+
+            Visualization.get(Config.ids.tour).then(onVisReady, onVisError);
         }
 
         function onPrevClick() {
@@ -58,6 +61,15 @@
             } else {
                 $state.go('tour.page', { page: ctl.pageConfig.next });
             }
+        }
+
+        function onVisReady(newVis, layers) {
+            vis = newVis;
+            $log.debug(vis);
+        }
+
+        function onVisError(error) {
+            $log.error(error);
         }
     }
 
