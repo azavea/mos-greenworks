@@ -1,0 +1,23 @@
+// Body reset
+
+html {
+  font-size: 62.5%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  font-family: $font-family-base;
+  // Work around for Chrome rem glitch http://www.wp-code.com/wordpress-snippets/how-to-stop-chrome-using-a-large-font-size-after-refreshing/
+  font-size: strip-units(rem($font-size-base))+em;
+  line-height: $line-height-base;
+  color: $text-color;
+  background-color: #fff;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+  font-feature-settings: "kern" 1;
+  text-rendering: geometricPrecision;
+  min-height: 100%;
+}

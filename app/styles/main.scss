@@ -1,6 +1,60 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
-// bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
-// endbower
 
-@import "layout";
+/**
+ * Vendor style importing
+ * Any frameworks, javascript plugins, etc
+ * Bootstrap, Foundation, Select2, etc
+ */
+@import
+  "vendors/bootstrap/bootstrap-variables",
+  "vendors/bootstrap/bootstrap-styles";
+
+/**
+ * All sass tools, utilities and helpers
+ * Includes Global variables, functions, mixins, placeholders
+ * Does not include vendors
+ */
+// @import
+//   "utils/variables",
+//   "utils/mixins",
+//   "utils/animate";
+
+/**
+ * Boilerplate styling
+ * Examples include browser reset, typographic rules, etc
+ * General rule of thumb no user defined selectors (.classes, #ids)
+ */
+@import
+  "base/structure",
+  "base/typography",
+  "base/mode-colors";
+
+/**
+ * App layout and overall structure
+ * Styling the main portion of the site.
+ * Grid, Navbar, footer, sidebar
+ */
+@import
+  "layout/nav",
+  "layout/sidebar",
+  "layout/filter",
+  "layout/map";
+
+/**
+ * Smaller components more focused on elements we'll call widgets/modules
+ * Including modules such as sliders, buttons, thumbnails, image uploaders, map, etc
+ * Will tend to contain a lot of component files.
+ */
+// @import
+//   "components/fancy-links",
+//   "components/buttons";
+
+/**
+ * Page-specific styles.
+ * Uncommon styles very specific to one area
+ * Example, homepage has different style header than overall app.
+ */
+// @import
+//   "pages/about",
+//   "pages/work",
+//   "pages/contact";

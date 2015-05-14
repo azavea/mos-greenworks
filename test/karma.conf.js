@@ -30,8 +30,14 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/config.js",
-      "app/scripts/views/home/module.js",
-      "app/scripts/views/home/home-controller.js",
+      "app/scripts/cartodb/module.js",
+      "app/scripts/cartodb/**.js",
+      "app/scripts/views/root/module.js",
+      "app/scripts/views/root/**.js",
+      "app/scripts/views/map/module.js",
+      "app/scripts/views/map/**.js",
+      "app/scripts/views/tour/module.js",
+      "app/scripts/views/tour/**.js",
       "app/scripts/app.js",
       "test/mock/**/*.js",
       "test/spec/**/*.js"

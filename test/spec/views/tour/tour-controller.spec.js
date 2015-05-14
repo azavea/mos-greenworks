@@ -1,10 +1,10 @@
 'use strict';
 
-describe('gw.views.home: HomeController', function () {
+describe('gw.views.tour: TourController', function () {
 
-    beforeEach(module('gw.views.home'));
+    beforeEach(module('gw.views.tour'));
 
-    var HomeController;
+    var TourController;
     var rootScope;
     var scope;
 
@@ -14,9 +14,9 @@ describe('gw.views.home: HomeController', function () {
         scope = $rootScope.$new();
     }));
 
-    describe('tests for home controller', function () {
+    describe('tests for tour controller', function () {
         beforeEach(inject(function ($controller) {
-            HomeController = $controller('HomeController', {
+            TourController = $controller('TourController', {
                 $scope: scope
             });
         }));
