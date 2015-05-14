@@ -29,6 +29,13 @@ grunt serve
 
 The app will be served at http://localhost:9000
 
+### Updating cartodb.js
+
+Ensure when updating that the try catch check in the vis-service.js get() function is still valid
+for the newer version of cartodb.js.
+
+TODO: Add a js test for this condition
+
 
 ## Testing
 
