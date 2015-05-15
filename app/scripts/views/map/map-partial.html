@@ -21,7 +21,7 @@
             </div>
             <div class="filter-header-heading vertical-align">Filters</div>
             <div class="filter-header-button vertical-align">
-                Reset | Clear
+                <span ng-click="map.onResetClicked()">Reset</span> | <span ng-click="map.onClearClicked()">Clear</span>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
                     <div class="filter-subcategory-heading">{{ ::projKey }}</div>
                     <div class="filter-subcategory-marker">
                         <div class="marker"
-                             ng-class="{'inactive': map.toggles.project[projKey]}"
+                             ng-class="{'inactive': !map.toggles.project[projKey]}"
                              ng-click="map.onProjectFilterClicked(projKey)">
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     <div class="filter-subcategory-heading">{{ ::subKey }} ({{ ::count }})</div>
                     <div class="filter-subcategory-marker">
                         <div class="marker"
-                             ng-class="{'inactive': map.toggles.sub[subKey]}"
+                             ng-class="{'inactive': !map.toggles.sub[subKey]}"
                              ng-click="map.onSubFilterClicked(subKey)">
                             <i class="fa fa-file button-icon"></i>
                         </div>
