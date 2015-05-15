@@ -6,7 +6,7 @@
      */
     /* ngInject */
     function TourPageController($log, $compile, $scope, $state, $stateParams, $timeout,
-                                Config, TourConfig, TourPopupConfig, Visualization) {
+                                Config, SQLFilter, TourConfig, TourPopupConfig, Visualization) {
 
         var vis = null;
         var popupContent = '' +
@@ -76,6 +76,22 @@
 
         function onVisReady(newVis) {
             vis = newVis;
+
+            var layerId = Config.cartodb.layerId;
+            var sublayerId = Config.cartodb.sublayerId;
+            var layer = vis.getLayers()[layerId];
+            var cdbSubLayer = layer.getSubLayer(sublayerId);
+            cdbSubLayer.setInteraction(false);
+
+            var valueList = ctl.pageConfig.section ? [ctl.pageConfig.section] : [];
+            var sqlFilter = new SQLFilter({
+                where: {
+                    column: 'section',
+                    list: valueList
+                }
+            });
+            cdbSubLayer.setSQL(sqlFilter.makeSql());
+
             showInfoPopup(vis.getNativeMap());
         }
 

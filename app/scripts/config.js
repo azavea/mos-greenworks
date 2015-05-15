@@ -15,6 +15,10 @@
         ids: {
             tour: 'tour',
             map: 'map'
+        },
+        cartodb: {
+            layerId: 1,
+            sublayerId: 2
         }
     };
 

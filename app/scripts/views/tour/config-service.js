@@ -7,6 +7,7 @@
         var config = {
             home: {
                 title: 'About Greenworks',
+                section: null,
                 details: 'This year’s Greenworks Progress Report reflects the culmination of six years of work ' +
                          'toward the energy, environment, equity, economy, and engagement targets established ' +
                          'in the initial 2009 plan. With the leadership and support of City staff, ' +
@@ -19,6 +20,7 @@
             },
             energy: {
                 title: 'Energy',
+                section: 'Energy',
                 details: 'City government energy usage rose in 2013 for the first time since 2007. As ' +
                          'shown in the chart on the facing page, energy usage rises and falls with changes in weather.',
                 css: 'mode-energy',
@@ -27,6 +29,7 @@
             },
             environment: {
                 title: 'Environment',
+                section: 'Environment',
                 details: 'City government energy usage rose in 2013 for the first time since 2007. ' +
                          'As shown in the chart on the facing page, energy usage rises and falls ' +
                          'with changes in weather.',
@@ -36,6 +39,7 @@
             },
             equity: {
                 title: 'Equity',
+                section: 'Equity',
                 details: 'City government energy usage rose in 2013 for the first time since 2007. As ' +
                          'shown in the chart on the facing page, energy usage rises and falls with changes in weather.',
                 css: 'mode-equity',
@@ -44,6 +48,7 @@
             },
             economy: {
                 title: 'Economy',
+                section: 'Economy',
                 details: 'City government energy usage rose in 2013 for the first time since 2007. As ' +
                          'shown in the chart on the facing page, energy usage rises and falls with changes in weather.',
                 css: 'mode-economy',
@@ -52,6 +57,7 @@
             },
             engagement: {
                 title: 'Engagement',
+                section: 'Engagement',
                 details: 'City government energy usage rose in 2013 for the first time since 2007. As ' +
                          'shown in the chart on the facing page, energy usage rises and falls with changes in weather.',
                 css: 'mode-engagement',
@@ -60,6 +66,7 @@
             },
             explore: {
                 title: 'Explore',
+                section: null,
                 details: '',
                 css: 'mode-explore',
                 previous: 'engagement',
