@@ -13,7 +13,8 @@
     }
 
     angular.module('gw.views.map', [
-        'ui.router'
+        'ui.router',
+        'ui.bootstrap'
     ])
     .config(StateConfig);
 })();

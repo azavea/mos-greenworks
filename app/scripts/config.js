@@ -17,6 +17,7 @@
             map: 'map'
         },
         cartodb: {
+            user: 'greenworks',
             layerId: 1,
             sublayerId: 2
         }
