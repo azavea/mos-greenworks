@@ -25,18 +25,15 @@
          * Get a cartodb visualization saved with visId
          * @param  {string} visId Visualization ID to retrieve
          * @return {$q.deferred} Promise that resolves once visualization is ready.
-         *                       The parameters passed to the promise callback are the same
-         *                       as cartodb.createVis().done():
-         *                           First argument is vis
-         *                           Second argument is layers
-         *                       If promise is rejected, only argument is an error string
+         *                       Promise is resolved with the vis object.
+         *                       Promise is rejected with an error string.
          */
         function get(visId) {
             var dfd = $q.defer();
             if (visualizations[visId]) {
                 try {
                     var layers = visualizations[visId].getLayers();
-                    dfd.resolve(visualizations[visId], layers);
+                    dfd.resolve(visualizations[visId]);
                 // If we don't have layers yet, catch the exception and wait for
                 // layers to be ready
                 } catch (e) {
@@ -45,8 +42,8 @@
                     // otherwise let the error fall through to reject
                     // This may need to be changed on upgrades to cartodbjs
                     if (e instanceof TypeError && e.message.indexOf('Cannot read property') !== -1) {
-                        visualizations[visId].done(function (vis, layers) {
-                            dfd.resolve(vis, layers);
+                        visualizations[visId].done(function (vis) {
+                            dfd.resolve(vis);
                         }, function (error) {
                             dfd.reject(error);
                         });
