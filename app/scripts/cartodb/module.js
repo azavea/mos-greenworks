@@ -1,5 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('cartodb', []);
+    angular.module('cartodb', [
+        'gw.config'
+    ]);
 })();

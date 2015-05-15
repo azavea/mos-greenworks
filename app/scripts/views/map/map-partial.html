@@ -25,62 +25,33 @@
             </div>
         </div>
     </div>
-    <div class="filter mode-energy">
-        <div class="filter-header clearfix">
+    <div class="filter"
+         ng-class="'mode-{{::key | lowercase}}'"
+         ng-repeat="(key, section) in map.categories"
+         ng-show="map.showCategories">
+        <div class="filter-header clearfix" ng-click="map.open[key] = !map.open[key]">
             <div class="filter-header-icon">
                 <div class="filter-header-icon-container mode-background">
-                    <img class="mode-icon vertical-align" height="30" width="30" src="/images/energy-logo.png" alt="">
+                    <img class="mode-icon vertical-align" height="30" width="30" ng-src="/images/{{ key | lowercase }}-logo.png" alt="">
                 </div>
             </div>
-            <div class="filter-header-heading vertical-align">Energy</div>
+            <div class="filter-header-heading vertical-align">{{ ::key }}</div>
             <div class="filter-header-button vertical-align">
-                <i class="fa fa-angle-up button-icon"></i>
+                <i class="fa fa-angle-up button-icon"
+                   ng-class="{'fa-angle-up': !map.open[key], 'fa-angle-down': map.open[key]}"></i>
             </div>
         </div>
-        <div class="filter-body">
-            <div class="filter-subcategory">
+        <div class="filter-body" collapse="!map.open[key]">
+            <div class="filter-subcategory" ng-repeat="(projKey, projectCat) in section">
                 <div class="filter-subcategory-header">
-                    <div class="filter-subcategory-heading">City-Owned Buildings</div>
+                    <div class="filter-subcategory-heading">{{ ::projKey }}</div>
                     <div class="filter-subcategory-marker">
                         <div class="marker">
                         </div>
                     </div>
                 </div>
-                <div class="filter-subcategory-item">
-                    <div class="filter-subcategory-heading">Energy-Efficient Affordable Housing</div>
-                    <div class="filter-subcategory-marker">
-                        <div class="marker">
-                            <i class="fa fa-file button-icon"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="filter-subcategory-item">
-                    <div class="filter-subcategory-heading">EnergyWorks Commercial Loans</div>
-                    <div class="filter-subcategory-marker">
-                        <div class="marker">
-                            <i class="fa fa-file button-icon"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="filter-subcategory">
-                <div class="filter-subcategory-header">
-                    <div class="filter-subcategory-heading">Privately-Owned Buildings</div>
-                    <div class="filter-subcategory-marker">
-                        <div class="marker">
-                        </div>
-                    </div>
-                </div>
-                <div class="filter-subcategory-item">
-                    <div class="filter-subcategory-heading">Energy-Efficient Affordable Housing</div>
-                    <div class="filter-subcategory-marker">
-                        <div class="marker">
-                            <i class="fa fa-file button-icon"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="filter-subcategory-item">
-                    <div class="filter-subcategory-heading">EnergyWorks Commercial Loans</div>
+                <div class="filter-subcategory-item" ng-repeat="(subKey, count) in projectCat">
+                    <div class="filter-subcategory-heading">{{ ::subKey }} ({{ ::count }})</div>
                     <div class="filter-subcategory-marker">
                         <div class="marker">
                             <i class="fa fa-file button-icon"></i>
