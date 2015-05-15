@@ -31,7 +31,7 @@
          * @return {object}
          */
         function get(configKey) {
-            return config[configKey] ? config[configKey] : config['energy'];
+            return config[configKey] ? config[configKey] : config.energy;
         }
     }
 

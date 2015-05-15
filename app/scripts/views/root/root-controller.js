@@ -6,7 +6,7 @@
      * Controller for the gw app root view -- handles header bar and search bar logic
      */
     /* ngInject */
-    function RootController($log, $state) {
+    function RootController($log) {
 
         var ctl = this;
 

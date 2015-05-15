@@ -73,7 +73,7 @@
         return module;
 
         function get(configKey) {
-            return config[configKey] ? config[configKey] : config['home'];
+            return config[configKey] ? config[configKey] : config.home;
         }
     }
 

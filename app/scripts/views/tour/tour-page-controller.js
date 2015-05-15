@@ -55,7 +55,7 @@
                 if (popup) {
                   vis.getNativeMap().closePopup(popup);
                 }
-            })
+            });
         }
 
         function onPrevClick() {
@@ -74,7 +74,7 @@
             }
         }
 
-        function onVisReady(newVis, layers) {
+        function onVisReady(newVis) {
             vis = newVis;
             showInfoPopup(vis.getNativeMap());
         }
@@ -91,7 +91,7 @@
                 .setContent(content[0]);
             $timeout(function () {
                 map.openPopup(popup);
-            })
+            });
         }
     }
 
