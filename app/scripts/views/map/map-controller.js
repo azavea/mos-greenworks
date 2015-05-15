@@ -19,8 +19,14 @@
             ctl.categories = {};
             ctl.filters = [];
             ctl.showCategories = false;
+            ctl.toggles = {
+                // Namespace because some project and subcategories have the same names
+                'project': {},
+                'sub': {}
+            };
 
-            ctl.onFilterClick = onFilterClick;
+            ctl.onProjectFilterClicked = onProjectFilterClicked;
+            ctl.onSubFilterClicked = onSubFilterClicked;
 
             cartodb.createVis('map', 'https://greenworks.cartodb.com/api/v2/viz/33627780-f988-11e4-8ff7-0e0c41326911/viz.json')
                 .done(onVisReady, onVisError);
@@ -38,8 +44,16 @@
             });
         }
 
-        function onFilterClick(level, key) {
+        function onProjectFilterClicked(key) {
+            ctl.toggles.project[key] = !ctl.toggles.project[key];
+            $log.debug(key);
+            // TODO: Implement by project filtering logic
+        }
 
+        function onSubFilterClicked(key) {
+            ctl.toggles.sub[key] = !ctl.toggles.sub[key];
+            $log.debug(key);
+            // TODO: Implement key filtering logic
         }
 
         function onVisReady(newVis) {
