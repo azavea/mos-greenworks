@@ -20,7 +20,9 @@
     }
 
     angular.module('gw.views.tour', [
-        'ui.router'
+        'ui.router',
+        'gw.config',
+        'cartodb'
     ])
     .config(StateConfig);
 })();

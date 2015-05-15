@@ -5,24 +5,29 @@
      * Controller for the gw app tour sidebar page view
      */
     /* ngInject */
-    function TourPageController($log, $scope, $state, $stateParams, TourConfig) {
+    function TourPageController($log, $compile, $scope, $state, $stateParams, $timeout,
+                                Config, TourConfig, TourPopupConfig, Visualization) {
 
+        var vis = null;
         var popupContent = '' +
-            '<div class="popup-left">' +
-               '<div class="popup-image" style="background-image: url(http://placehold.it/350x150)">' +
-               '</div>' +
-           '</div>' +
-           '<div class="popup-right">' +
-               '<h4 class="popup-header mode-background">City LEED Buildings</h4>' +
-               '<div class="popup-body">' +
-                   '<h5 class="popup-heading mode-color">Address</h5>' +
-                   '<div class="h5">4750 Grays Ferry Avenue</div>' +
-                   '<h5 class="popup-heading mode-color">Target</h5>' +
-                   '<div class="h5">Target 1 Lower City Government Energy Consumption by 30 Percent.</div>' +
-                   '<h5 class="popup-heading mode-color">Description</h5>' +
-                   '<div class="h5">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam euismod tincidunt.</div>' +
-               '</div>' +
-           '</div>';
+            '<div ng-class="tour.pageConfig.css">' +
+              '<div class="popup-left">' +
+                '<div class="popup-image" ng-style="{ \'background-image\': \'url(\' + tour.popupInfo.image + \')\' }">' +
+                '</div>' +
+              '</div>' +
+              '<div class="popup-right">' +
+                '<h4 class="popup-header mode-background">{{ ::tour.popupInfo.title }}</h4>' +
+                '<div class="popup-body">' +
+                  '<h5 class="popup-heading mode-color">Address</h5>' +
+                  '<div class="h5">{{ ::tour.popupInfo.address }}</div>' +
+                  '<h5 class="popup-heading mode-color">Target</h5>' +
+                  '<div class="h5">{{ ::tour.popupInfo.target }}</div>' +
+                  '<h5 class="popup-heading mode-color">Description</h5>' +
+                  '<div class="h5">{{ ::tour.popupInfo.description }}</div>' +
+                '</div>' +
+             '</div>' +
+            '</div>';
+        var popup = null;
 
         var ctl = this;
         initialize();
@@ -42,6 +47,15 @@
 
             ctl.onPrevClick = onPrevClick;
             ctl.onNextClick = onNextClick;
+
+            Visualization.get(Config.ids.tour).then(onVisReady, onVisError);
+
+            // Always clear the popup when we leave this view
+            $scope.$on('$destroy', function () {
+                if (popup) {
+                  vis.getNativeMap().closePopup(popup);
+                }
+            });
         }
 
         function onPrevClick() {
@@ -58,6 +72,26 @@
             } else {
                 $state.go('tour.page', { page: ctl.pageConfig.next });
             }
+        }
+
+        function onVisReady(newVis) {
+            vis = newVis;
+            showInfoPopup(vis.getNativeMap());
+        }
+
+        function onVisError(error) {
+            $log.error(error);
+        }
+
+        function showInfoPopup(map) {
+            ctl.popupInfo = TourPopupConfig.get(ctl.page);
+            var content = $compile(popupContent)($scope);
+            popup = L.popup({ minWidth: 600 })
+                .setLatLng(ctl.popupInfo.point)
+                .setContent(content[0]);
+            $timeout(function () {
+                map.openPopup(popup);
+            });
         }
     }
 
