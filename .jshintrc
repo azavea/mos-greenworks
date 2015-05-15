@@ -18,6 +18,7 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
+    "_": true,
     "angular": false,
     "cartodb": true,
     "L": true
