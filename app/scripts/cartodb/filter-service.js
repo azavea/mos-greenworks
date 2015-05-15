@@ -141,7 +141,7 @@
             angular.forEach(list, function (value) {
                 if (typeof value === 'string') {
                     // Must be single quotes, cartodb errors on double quotes
-                    wrappedList.push('\'' + value + '\'');
+                    wrappedList.push('\'' + value.replace("'", "''") + '\'');
                 } else if (typeof value === 'number') {
                     wrappedList.push(value);
                 }
