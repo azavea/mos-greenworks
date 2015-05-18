@@ -24,11 +24,13 @@
                 'project': {},
                 'sub': {}
             };
+            ctl.open = {};      // accordion toggle state
 
             ctl.onProjectFilterClicked = onProjectFilterClicked;
             ctl.onSubFilterClicked = onSubFilterClicked;
             ctl.onResetClicked = onResetClicked;
             ctl.onClearClicked = onClearClicked;
+            ctl.onHeaderClicked = onHeaderClicked;
 
             cartodb.createVis('map', 'https://greenworks.cartodb.com/api/v2/viz/33627780-f988-11e4-8ff7-0e0c41326911/viz.json')
                 .done(onVisReady, onVisError);
@@ -120,6 +122,13 @@
                 ctl.toggles.project[key] = value;
             });
             updateFilter();
+        }
+
+        function onHeaderClicked(headerKey) {
+            angular.forEach(ctl.open, function (value, key) {
+                ctl.open[key] = false;
+            });
+            ctl.open[headerKey] = true;
         }
 
     }

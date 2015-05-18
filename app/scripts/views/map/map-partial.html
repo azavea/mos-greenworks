@@ -29,7 +29,7 @@
          ng-class="'mode-{{::key | lowercase}}'"
          ng-repeat="(key, section) in map.categories"
          ng-show="map.showCategories">
-        <div class="filter-header clearfix" ng-click="map.open[key] = !map.open[key]">
+        <div class="filter-header clearfix" ng-click="map.onHeaderClicked(key)">
             <div class="filter-header-icon">
                 <div class="filter-header-icon-container mode-background">
                     <img class="mode-icon vertical-align" height="30" width="30" ng-src="/images/{{ key | lowercase }}-logo.png" alt="">
