@@ -10,7 +10,7 @@
  *     where: {
  *         column: 'sub_category',  // String column to do the where ... IN(..) on
  *         list: []                 // List of values in the column to filter on
- *                                  // If empty, no where clause is added
+ *                                  // If null, no where clause is added
  *     }
  * }
  *
@@ -53,7 +53,7 @@
             displayFields: ['*'],
             where: {
                 column: 'sub_category',
-                list: []
+                list: null
             }
         };
 
@@ -98,7 +98,7 @@
             if (where.column && typeof where.column === 'string') {
                 this.where.column = where.column;
             }
-            if (where.list && where.list instanceof Array) {
+            if (where.list === null || (where.list && where.list instanceof Array)) {
                 this.where.list = where.list;
             }
         };
@@ -114,11 +114,13 @@
             var displayFields = options.displayFields || this.displayFields;
             var where = options.where || this.where;
             var query = 'SELECT ' + displayFields.join(', ') + ' FROM ' + this.tableName;
-            if (where.list.length > 0) {
-                var list = wrapListQuotes(where.list);
+            if (where.list instanceof Array) {
+                // escape values in array, or if none selected, add an invalid key to
+                // make nothing on the map selected
+                var list = where.list.length > 0 ? wrapListQuotes(where.list) : ['\'DOESNOTEXIST\''];
                 query += ' WHERE ' + where.column + ' IN (' + list.join(', ') + ')';
             }
-            //$log.debug('SQLFilter.makeSql(): ', query);
+            $log.debug('SQLFilter.makeSql(): ', query);
             return query;
         };
 
