@@ -35,8 +35,8 @@
 
             Categories.get().then(function (categories) {
                 ctl.categories = categories;
-                ctl.toggles.project = allProjectKeys(ctl.categories);
-                ctl.toggles.sub = allKeysFromCategories(ctl.categories);
+                ctl.toggles.project = Categories.allProjectKeys();
+                ctl.toggles.sub = Categories.allSubKeys();
 
                 // Cheat and delay showing filters for one more digest cycle
                 // No matter what I can't seem to get the unstyled/open categories flash to
@@ -51,7 +51,7 @@
             ctl.toggles.project[key] = !ctl.toggles.project[key];
             var val = ctl.toggles.project[key];
 
-            var subKeys = getKeysForCategory(ctl.categories, key);
+            var subKeys = Categories.getKeysForCategory(ctl.categories, key);
             angular.forEach(subKeys, function (subKey) {
                 ctl.toggles.sub[subKey] = val;
             });
@@ -67,7 +67,7 @@
             // else we need to check if all the subkeys are false now, and if so,
             // set parent to false
             } else {
-                var subKeys = getKeysForCategory(ctl.categories, projKey);
+                var subKeys = Categories.getKeysForCategory(ctl.categories, projKey);
                 var allFalse = _.every(subKeys, function (subKey) {
                     return ctl.toggles.sub[subKey] === false;
                 });
@@ -122,55 +122,6 @@
             updateFilter();
         }
 
-        /**
-         * Helper to retrieve keys for a given product category
-         *
-         * Takes top level categories object
-         *
-         * @param  {[type]} categories [description]
-         * @return {[type]}            [description]
-         */
-        function getKeysForCategory(categories, searchKey) {
-            var keys = [];
-            angular.forEach(categories, function (value, key) {
-                if (searchKey === key) {
-                    keys = keys.concat(_.keys(value));
-                } else {
-                    keys = keys.concat(getKeysForCategory(value, searchKey));
-                }
-            });
-            return keys;
-        }
-
-        /**
-         * Helper to retrive all product_category keys (at the second level)
-         */
-        function allProjectKeys(categories) {
-            var keys = {};
-            angular.forEach(categories, function (value) {
-                var prodKeys = _.mapValues(value, function () {
-                    return true;
-                });
-                angular.extend(keys, prodKeys);
-            });
-            return keys;
-        }
-
-        /**
-         * Helper function to create a single depth object of subcategory keys
-         * Defaults all keys to enabled
-         */
-        function allKeysFromCategories(categories) {
-            var keys = {};
-            angular.forEach(categories, function (value, key) {
-                if (value instanceof Object) {
-                    angular.extend(keys, allKeysFromCategories(value));
-                } else {
-                    keys[key] = true;
-                }
-            });
-            return keys;
-        }
     }
 
     angular.module('gw.views.map')
