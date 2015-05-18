@@ -83,7 +83,7 @@
             var cdbSubLayer = layer.getSubLayer(sublayerId);
             cdbSubLayer.setInteraction(false);
 
-            var valueList = ctl.pageConfig.section ? [ctl.pageConfig.section] : [];
+            var valueList = ctl.pageConfig.section ? [ctl.pageConfig.section] : null;
             var sqlFilter = new SQLFilter({
                 where: {
                     column: 'section',
