@@ -60,6 +60,22 @@
 
         function onSubFilterClicked(key) {
             ctl.toggles.sub[key] = !ctl.toggles.sub[key];
+            var projKey = Categories.getSubcategoryParentKey(key);
+            // if subKey is now true, set parent to true
+            if (ctl.toggles.sub[key] === true) {
+                ctl.toggles.project[projKey] = true;
+            // else we need to check if all the subkeys are false now, and if so,
+            // set parent to false
+            } else {
+                var subKeys = getKeysForCategory(ctl.categories, projKey);
+                var allFalse = _.every(subKeys, function (subKey) {
+                    return ctl.toggles.sub[subKey] === false;
+                });
+                if (allFalse) {
+                    ctl.toggles.project[projKey] = false;
+                }
+            }
+
             updateFilter();
         }
 
@@ -138,16 +154,6 @@
                 angular.extend(keys, prodKeys);
             });
             return keys;
-            /*
-            //play with this later
-            var data = _(categories).values()
-                .map(function(k) { return _.keys(k); })
-                .flatten()
-                .mapValues(function () { return true; })
-                .value();
-            $log.debug(data);
-            return data;
-            */
         }
 
         /**

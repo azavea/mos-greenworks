@@ -118,7 +118,7 @@
                 var list = wrapListQuotes(where.list);
                 query += ' WHERE ' + where.column + ' IN (' + list.join(', ') + ')';
             }
-            $log.debug('SQLFilter.makeSql(): ', query);
+            //$log.debug('SQLFilter.makeSql(): ', query);
             return query;
         };
 

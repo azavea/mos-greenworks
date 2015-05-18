@@ -5,7 +5,8 @@
     /* ngInject */
     function Categories ($log, $q, Config) {
 
-        var categories = null;
+        var categoriesList = null;
+        var categoriesTree = null;
         var categoriesQuery = [
             'SELECT COUNT(*), section, project_category, sub_category FROM master_datalist',
             'GROUP BY section, project_category, sub_category',
@@ -14,24 +15,39 @@
 
         var sql = new cartodb.SQL({ user: Config.cartodb.user });
         var module = {
-            get: get
+            get: get,
+            getSubcategoryParentKey: getSubcategoryParentKey
         };
         return module;
 
         function get() {
             var dfd = $q.defer();
-            if (categories) {
-                dfd.resolve(categories);
+            if (categoriesTree) {
+                dfd.resolve(categoriesTree);
             } else {
                 sql.execute(categoriesQuery).done(function (data) {
+                    categoriesList = data.rows;
                     var newCategories = parseResponse(data.rows);
-                    categories = newCategories;
-                    dfd.resolve(categories);
+                    categoriesTree = newCategories;
+                    dfd.resolve(categoriesTree);
                 }).error(function (error) {
                     dfd.reject(error);
                 });
             }
             return dfd.promise;
+        }
+
+        /**
+         * Get the parent of a subcategory
+         *
+         * @param  {string} subCategory sub category to get the parent key for
+         * @return {string}             project category key that owns the sub category
+         */
+        function getSubcategoryParentKey(subCategory) {
+            var category = _.find(categoriesList, function (c) {
+                return c.sub_category === subCategory;
+            });
+            return category ? category.project_category : null;
         }
 
         /**
@@ -70,7 +86,6 @@
                     data[section][projectCat][subCat] = count;
                 }
             });
-            $log.debug(data);
             return data;
         }
     }
