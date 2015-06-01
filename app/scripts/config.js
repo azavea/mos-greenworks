@@ -20,6 +20,16 @@
             user: 'greenworks',
             layerId: 1,
             sublayerId: 2
+        },
+        bounds: {
+            northEast: {
+                lat: 40.148059,
+                lng: -74.945342
+            },
+            southWest: {
+                lat: 39.869314,
+                lng: -75.291411
+            }
         }
     };
 

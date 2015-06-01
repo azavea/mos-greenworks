@@ -5,7 +5,7 @@
      * Controller for the gw app map view
      */
     /* ngInject */
-    function MapController($log, $timeout, Categories, Config, SQLFilter) {
+    function MapController($log, $timeout, $stateParams, Categories, Config, SQLFilter) {
 
         var ctl = this;
         var vis = null;
@@ -83,6 +83,16 @@
 
         function onVisReady(newVis) {
             vis = newVis;
+
+            // Set bounds if applicable
+            var map = vis.getNativeMap();
+            var bbox = $stateParams.bbox ? $stateParams.bbox.split(',') : [];
+            if (bbox && bbox.length === 4) {
+                var bounds = L.latLngBounds([[bbox[1], bbox[0]], [bbox[3], bbox[2]]]);
+                map.fitBounds(bounds);
+            }
+
+            // Set cartodb layers and sql
             var layerId = Config.cartodb.layerId;
             var sublayerId = Config.cartodb.sublayerId;
             cdbSubLayer = vis.getLayers()[layerId].getSubLayer(sublayerId);
