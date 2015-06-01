@@ -8,6 +8,10 @@ To set up a dev environment on your local machine, run the following:
 # Ruby gems for css compilation
 gem install sass compass
 
+# Ruby gem for deployment
+# Requires java jre to be installed on your system
+gem install s3_website
+
 # Global npm packages for dev
 npm install -g grunt-cli bower
 
@@ -47,9 +51,25 @@ grunt test
 
 ## Deploying
 
-Build the minified app with:
+First, ensure bower components are up to date:
+```
+bower install
+```
+
+Then, build the minified app with:
 ```
 grunt build
 ```
 
-TODO: Deploy notes, via s3_website
+Configure s3_website for deployment by setting the following ENV variables:
+  - GREENWORKS_ACCESS_KEY
+  - GREENWORKS_SECRET_KEY
+
+Once the AWS access keys are set in your environment, deploy the app:
+```
+s3_website push --force
+```
+
+If you want to change the bucket the app deploys to, edit the `s3_bucket` setting in s3_website.yml
+
+If you change the bucket, ensure you setup static hosting and bucket permissions via the AWS console.
