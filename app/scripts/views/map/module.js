@@ -5,7 +5,7 @@
     function StateConfig($stateProvider) {
         $stateProvider.state('map', {
             parent: 'root',
-            url: '/map',
+            url: '/map?bbox',
             templateUrl: 'scripts/views/map/map-partial.html',
             controller: 'MapController',
             controllerAs: 'map'

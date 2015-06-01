@@ -13,7 +13,9 @@
     }
 
     angular.module('gw.views.root', [
-        'ui.router'
+        'ui.router',
+        'ui.bootstrap',
+        'gw.geocoder'
     ])
     .config(StateConfig);
 })();

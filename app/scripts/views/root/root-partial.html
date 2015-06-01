@@ -30,7 +30,15 @@
                 <ul class="nav navbar-nav navbar-right">
                     <form class="navbar-form navbar-left" role="search">
                         <div class="input-group">
-                            <input type="text" width="100" placeholder="Search address or neighborhood" class="form-control" placeholder="Search">
+                            <input type="text"
+                                   width="100"
+                                   placeholder="Search address or neighborhood"
+                                   class="form-control"
+                                   ng-model="root.searchText"
+                                   typeahead="location as location.text for location in root.suggest($viewValue)"
+                                   typeahead-on-select="root.search($item.text, $item.magicKey)"
+                                   typeahead-wait-ms="300"
+                                   typeahead-min-length="3" />
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
                             </span>
