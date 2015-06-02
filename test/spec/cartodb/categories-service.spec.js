@@ -1,7 +1,7 @@
 
 'use strict';
 
-describe('gw.cartodb: SQLFilter', function () {
+describe('gw.cartodb: Categories', function () {
 
     beforeEach(module('cartodb'));
     beforeEach(module('mock.responses'));
