@@ -34,6 +34,8 @@ module.exports = function(config) {
       "app/scripts/config.js",
       "app/scripts/cartodb/module.js",
       "app/scripts/cartodb/**.js",
+      "app/scripts/geocoder/module.js",
+      "app/scripts/geocoder/**.js",
       "app/scripts/views/root/module.js",
       "app/scripts/views/root/**.js",
       "app/scripts/views/map/module.js",
@@ -41,7 +43,9 @@ module.exports = function(config) {
       "app/scripts/views/tour/module.js",
       "app/scripts/views/tour/**.js",
       "app/scripts/app.js",
-      "test/mock/**/*.js",
+      "test/mock/cartodbjs/**.js",
+      "test/mock/responses/module.js",
+      "test/mock/responses/**.js",
       "test/spec/**/*.js"
     ],
 

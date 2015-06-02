@@ -12,7 +12,7 @@
     'use strict';
 
     /* ngInject */
-    function Categories ($log, $q, Config) {
+    function Categories ($log, $q) {
 
         var categoriesList = null;
         var categoriesTree = null;
@@ -22,7 +22,6 @@
             'ORDER BY section, project_category, sub_category'
         ].join(' ');
 
-        var sql = new cartodb.SQL({ user: Config.cartodb.user });
         var module = {
             get: get,
             getSubcategoryParentKey: getSubcategoryParentKey,
@@ -32,7 +31,12 @@
         };
         return module;
 
-        function get() {
+        /**
+         * Get and parse categories from a passed cartodb.sql object
+         * @param  {cartodb.SQL} sql
+         * @return {$q promise}  promise that resolves with parse category tree
+         */
+        function get(sql) {
             var dfd = $q.defer();
             if (categoriesTree) {
                 dfd.resolve(categoriesTree);

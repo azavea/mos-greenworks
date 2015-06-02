@@ -35,7 +35,8 @@
             cartodb.createVis('map', 'https://greenworks.cartodb.com/api/v2/viz/33627780-f988-11e4-8ff7-0e0c41326911/viz.json')
                 .done(onVisReady, onVisError);
 
-            Categories.get().then(function (categories) {
+            var sql = new cartodb.SQL({ user: Config.cartodb.user });
+            Categories.get(sql).then(function (categories) {
                 ctl.categories = categories;
                 ctl.toggles.project = Categories.allProjectKeys();
                 ctl.toggles.sub = Categories.allSubKeys();

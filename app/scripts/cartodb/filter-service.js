@@ -111,9 +111,10 @@
          */
         Filter.prototype.makeSql = function (options) {
             options = options || {};
+            var tableName = options.tableName || this.tableName;
             var displayFields = options.displayFields || this.displayFields;
             var where = options.where || this.where;
-            var query = 'SELECT ' + displayFields.join(', ') + ' FROM ' + this.tableName;
+            var query = 'SELECT ' + displayFields.join(', ') + ' FROM ' + tableName;
             if (where.list instanceof Array) {
                 // escape values in array, or if none selected, add an invalid key to
                 // make nothing on the map selected
