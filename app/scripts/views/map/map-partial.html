@@ -68,20 +68,17 @@
                 <div class="filter-body" collapse="!map.open[key]">
                     <div class="filter-subcategory" ng-repeat="(projKey, projectCat) in section">
                         <div class="filter-subcategory-header">
-                            <!--
-                            <div class="filter-subcategory-marker">
-                                <div class="marker"
-                                     ng-class="{'inactive': !map.toggles.project[projKey]}"
-                                     ng-click="map.onProjectFilterClicked(projKey)">
-                                </div>
+                            <div class="filter-category-checkbox">
+                                <input ng-checked="map.toggles.project[projKey]"
+                                       ng-click="map.onProjectFilterClicked(projKey)"
+                                       type="checkbox">
                             </div>
-                            -->
                             <div class="filter-subcategory-heading">{{ ::projKey }}</div>
                         </div>
                         <div class="filter-subcategory-item" ng-repeat="(subKey, count) in projectCat">
                             <div class="filter-subcategory-checkbox">
-                                <input ng-model="map.toggles.sub[subKey]"
-                                       ng-change="map.onSubFilterClicked($value)"
+                                <input ng-checked="map.toggles.sub[subKey]"
+                                       ng-click="map.onSubFilterClicked(subKey)"
                                        type="checkbox">
                             </div>
                             <div class="filter-subcategory-marker">
