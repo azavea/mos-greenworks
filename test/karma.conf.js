@@ -16,7 +16,7 @@ module.exports = function(config) {
     // testing framework to use (jasmine/mocha/qunit/...)
     // as well as any additional frameworks (requirejs/chai/sinon/...)
     frameworks: [
-      "jasmine"
+      'jasmine'
     ],
 
     // list of files / patterns to load in the browser
@@ -32,22 +32,22 @@ module.exports = function(config) {
       'bower_components/angular-scroll/angular-scroll.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
-      "app/scripts/config.js",
-      "app/scripts/cartodb/module.js",
-      "app/scripts/cartodb/**.js",
-      "app/scripts/geocoder/module.js",
-      "app/scripts/geocoder/**.js",
-      "app/scripts/views/root/module.js",
-      "app/scripts/views/root/**.js",
-      "app/scripts/views/map/module.js",
-      "app/scripts/views/map/**.js",
-      "app/scripts/views/tour/module.js",
-      "app/scripts/views/tour/**.js",
-      "app/scripts/app.js",
-      "test/mock/cartodbjs/**.js",
-      "test/mock/responses/module.js",
-      "test/mock/responses/**.js",
-      "test/spec/**/*.js"
+      'app/scripts/config.js',
+      'app/scripts/affix/module.js',
+      'app/scripts/affix/**.js',
+      'app/scripts/cartodb/module.js',
+      'app/scripts/cartodb/**.js',
+      'app/scripts/geocoder/module.js',
+      'app/scripts/geocoder/**.js',
+      'app/scripts/views/home/module.js',
+      'app/scripts/views/home/**.js',
+      'app/scripts/views/map/module.js',
+      'app/scripts/views/map/**.js',
+      'app/scripts/app.js',
+      'test/mock/cartodbjs/**.js',
+      'test/mock/responses/module.js',
+      'test/mock/responses/**.js',
+      'test/spec/**/*.js'
     ],
 
     // list of files / patterns to exclude
@@ -66,13 +66,13 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      "PhantomJS"
+      'PhantomJS'
     ],
 
     // Which plugins to enable
     plugins: [
-      "karma-phantomjs-launcher",
-      "karma-jasmine"
+      'karma-phantomjs-launcher',
+      'karma-jasmine'
     ],
 
     // Continuous Integration mode
