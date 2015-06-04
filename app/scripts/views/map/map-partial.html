@@ -131,9 +131,9 @@
                                        width="100"
                                        placeholder="Search address or neighborhood"
                                        class="form-control"
-                                       ng-model="root.searchText"
-                                       typeahead="location as location.text for location in root.suggest($viewValue)"
-                                       typeahead-on-select="root.search($item.text, $item.magicKey)"
+                                       ng-model="map.searchText"
+                                       typeahead="location as location.text for location in map.suggest($viewValue)"
+                                       typeahead-on-select="map.search($item.text, $item.magicKey)"
                                        typeahead-wait-ms="300"
                                        typeahead-min-length="3" />
                                 <span class="input-group-btn">
