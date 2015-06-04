@@ -1,69 +1,209 @@
-<aside class="sidebar explore mode-home">
-    <div class="sidebar-header explore mode-background">
-        <div class="text">
-            <h1 class="sidebar-heading explore">
-                <div class="sidebar-heading-inner explore" ui-sref="tour.page({page: 'home' })">About Greenworks</div>
-            </h1>
-        </div>
-    </div>
-</aside>
-<div class="filters">
-    <div class="filter-menu">
-        <div class="filter-header clearfix">
-            <div class="filter-header-icon">
-                <div class="filter-header-icon-container">
-                    <button type="button" class="filter-toggle vertical-align">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-            </div>
-            <div class="filter-header-heading vertical-align">Filters</div>
-            <div class="filter-header-button vertical-align">
-                <span ng-click="map.onResetClicked()">Reset</span> | <span ng-click="map.onClearClicked()">Clear</span>
-            </div>
-        </div>
-    </div>
-    <div class="filter"
-         ng-class="'mode-{{::key | lowercase}}'"
-         ng-repeat="(key, section) in map.categories"
-         ng-show="map.showCategories">
-        <div class="filter-header clearfix" ng-click="map.onHeaderClicked(key)">
-            <div class="filter-header-icon">
-                <div class="filter-header-icon-container mode-background">
-                    <img class="mode-icon vertical-align" height="30" width="30" ng-src="/images/{{ key | lowercase }}-logo.png" alt="">
-                </div>
-            </div>
-            <div class="filter-header-heading vertical-align">{{ ::key }}</div>
-            <div class="filter-header-button vertical-align">
-                <i class="fa fa-angle-up button-icon"
-                   ng-class="{'fa-angle-up': !map.open[key], 'fa-angle-down': map.open[key]}"></i>
-            </div>
-        </div>
-        <div class="filter-body" collapse="!map.open[key]">
-            <div class="filter-subcategory" ng-repeat="(projKey, projectCat) in section">
-                <div class="filter-subcategory-header">
-                    <div class="filter-subcategory-heading">{{ ::projKey }}</div>
-                    <div class="filter-subcategory-marker">
-                        <div class="marker"
-                             ng-class="{'inactive': !map.toggles.project[projKey]}"
-                             ng-click="map.onProjectFilterClicked(projKey)">
+<!--
+        <div class="view-map">
+            <header>
+                <nav class="navbar navbar-default navbar-map">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" ui-sref="tour.page({ page: 'home' })">
+                                <img src="/images/branding-greenworks-inverted.svg" alt="">
+                            </a>
+                        </div>
+                        <div id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <form class="navbar-form navbar-left" role="search">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               width="100"
+                                               placeholder="Search address or neighborhood"
+                                               class="form-control"
+                                               ng-model="root.searchText"
+                                               typeahead="location as location.text for location in root.suggest($viewValue)"
+                                               typeahead-on-select="root.search($item.text, $item.magicKey)"
+                                               typeahead-wait-ms="300"
+                                               typeahead-min-length="3" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="filters">
+                <div class="filter-menu">
+                    <div class="filter-header clearfix">
+                        <div class="filter-header-icon">
+                            <div class="filter-header-icon-container">
+                                <button type="button" class="filter-toggle vertical-align">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="filter-header-heading vertical-align">Filters</div>
+                        <div class="filter-header-button vertical-align">
+                            Reset | Clear
                         </div>
                     </div>
                 </div>
-                <div class="filter-subcategory-item" ng-repeat="(subKey, count) in projectCat">
-                    <div class="filter-subcategory-heading">{{ ::subKey }} ({{ ::count }})</div>
-                    <div class="filter-subcategory-marker">
-                        <div class="marker"
-                             ng-class="{'inactive': !map.toggles.sub[subKey]}"
-                             ng-click="map.onSubFilterClicked(subKey)">
-                            <i class="fa fa-file button-icon"></i>
+                <div class="filter-individuals">
+                    <div class="filter mode-energy">
+                        <div class="filter-header clearfix">
+                            <div class="filter-header-icon">
+                                <div class="filter-header-icon-container mode-background">
+                                    <img class="mode-icon vertical-align" height="30" width="30" src="/images/logo-energy.svg" alt="">
+                                </div>
+                            </div>
+                            <div class="filter-header-heading vertical-align">Energy</div>
+                            <div class="filter-header-button vertical-align">
+                                <i class="fa fa-angle-up button-icon"></i>
+                            </div>
+                        </div>
+                        <div class="filter-body">
+                            <div class="filter-subcategory">
+                                <div class="filter-subcategory-header">
+                                    <div class="filter-subcategory-heading">City-Owned Buildings</div>
+                                </div>
+                                <div class="filter-subcategory-item">
+                                    <div class="filter-subcategory-checkbox">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="filter-subcategory-marker">
+                                        <div class="marker">
+                                            <i class="fa fa-file button-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="filter-subcategory-heading">Energy-Efficient Affordable Housing</div>
+                                </div>
+                            </div>
+                            <div class="filter-subcategory">
+                                <div class="filter-subcategory-header">
+                                    <div class="filter-subcategory-heading">City-Owned Buildings</div>
+                                </div>
+                                <div class="filter-subcategory-item">
+                                    <div class="filter-subcategory-checkbox">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="filter-subcategory-marker">
+                                        <div class="marker">
+                                            <i class="fa fa-file button-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="filter-subcategory-heading">Energy-Efficient Affordable Housing</div>
+                                </div>
+                                <div class="filter-subcategory-item">
+                                    <div class="filter-subcategory-checkbox">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="filter-subcategory-marker">
+                                        <div class="marker">
+                                            <i class="fa fa-file button-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="filter-subcategory-heading">Energy-Efficient Affordable Housing</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="map" class="map"></div>
+        </div>
+-->
+
+<div class="view-map">
+    <header>
+        <nav class="navbar navbar-default navbar-map">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" ui-sref="home">
+                        <img src="/images/branding-greenworks-inverted.svg" alt="">
+                    </a>
+                </div>
+                <div id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="input-group">
+                                <input type="text"
+                                       width="100"
+                                       placeholder="Search address or neighborhood"
+                                       class="form-control"
+                                       ng-model="root.searchText"
+                                       typeahead="location as location.text for location in root.suggest($viewValue)"
+                                       typeahead-on-select="root.search($item.text, $item.magicKey)"
+                                       typeahead-wait-ms="300"
+                                       typeahead-min-length="3" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="filters">
+        <div class="filter-menu">
+            <div class="filter-header clearfix">
+                <div class="filter-header-icon">
+                    <div class="filter-header-icon-container">
+                        <button type="button" class="filter-toggle vertical-align">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="filter-header-heading vertical-align">Filters</div>
+                <div class="filter-header-button vertical-align">
+                    <span ng-click="map.onResetClicked()">Reset</span> | <span ng-click="map.onClearClicked()">Clear</span>
+                </div>
+            </div>
+        </div>
+        <div class="filter"
+             ng-class="'mode-{{::key | lowercase}}'"
+             ng-repeat="(key, section) in map.categories"
+             ng-show="map.showCategories">
+            <div class="filter-header clearfix" ng-click="map.onHeaderClicked(key)">
+                <div class="filter-header-icon">
+                    <div class="filter-header-icon-container mode-background">
+                        <img class="mode-icon vertical-align" height="30" width="30" ng-src="/images/{{ key | lowercase }}-logo.png" alt="">
+                    </div>
+                </div>
+                <div class="filter-header-heading vertical-align">{{ ::key }}</div>
+                <div class="filter-header-button vertical-align">
+                    <i class="fa fa-angle-up button-icon"
+                       ng-class="{'fa-angle-up': !map.open[key], 'fa-angle-down': map.open[key]}"></i>
+                </div>
+            </div>
+            <div class="filter-body" collapse="!map.open[key]">
+                <div class="filter-subcategory" ng-repeat="(projKey, projectCat) in section">
+                    <div class="filter-subcategory-header">
+                        <div class="filter-subcategory-heading">{{ ::projKey }}</div>
+                        <div class="filter-subcategory-marker">
+                            <div class="marker"
+                                 ng-class="{'inactive': !map.toggles.project[projKey]}"
+                                 ng-click="map.onProjectFilterClicked(projKey)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-subcategory-item" ng-repeat="(subKey, count) in projectCat">
+                        <div class="filter-subcategory-heading">{{ ::subKey }} ({{ ::count }})</div>
+                        <div class="filter-subcategory-marker">
+                            <div class="marker"
+                                 ng-class="{'inactive': !map.toggles.sub[subKey]}"
+                                 ng-click="map.onSubFilterClicked(subKey)">
+                                <i class="fa fa-file button-icon"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div id="map" class="explore map"></div>
 </div>
-<div id="map" class="explore map"></div>

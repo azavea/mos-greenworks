@@ -4,7 +4,6 @@
     /* ngInject */
     function StateConfig($stateProvider) {
         $stateProvider.state('map', {
-            parent: 'root',
             url: '/map?bbox',
             templateUrl: 'scripts/views/map/map-partial.html',
             controller: 'MapController',
@@ -14,7 +13,9 @@
 
     angular.module('gw.views.map', [
         'ui.router',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'cartodb',
+        'gw.geocoder'
     ])
     .config(StateConfig);
 })();

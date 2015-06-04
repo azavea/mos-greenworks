@@ -5,7 +5,7 @@
      * Controller for the gw app map view
      */
     /* ngInject */
-    function MapController($log, $timeout, $stateParams, Categories, Config, SQLFilter) {
+    function MapController($log, $timeout, $stateParams, Categories, Config, Geocoder, SQLFilter) {
 
         var ctl = this;
         var vis = null;
