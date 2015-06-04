@@ -1,6 +1,6 @@
 <div class="view-home">
     <div class="content">
-        <header>
+        <header affix>
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="row">
@@ -36,13 +36,16 @@
             </nav>
         </header>
         <div class="text-container">
-            <aside>
+            <aside affix affix-offset-top="132">
                 <ul>
                     <li ng-repeat="section in home.sections">
                         <div class="sidebar-icon">
                             <img ng-src="/images/icon-{{ ::section.key }}.svg" alt="">
                         </div>
-                        <div class="sidebar-title">{{ ::section.title }}</li>
+                        <a href="#{{ ::section.key}}" class="sidebar-title" du-smooth-scroll du-scrollspy>
+                            {{ ::section.title }}
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <main>
@@ -53,7 +56,11 @@
                         <p>This year’s Greenworks Progress Report reflects the culmination of six years of work toward the energy, environment, equity, economy, and engagement targets established in the initial 2009 plan. With the leadership and support of City staff, community partners, and elected officials, Philadelphia has seen gains in all of the Greenworks focus areas.</p>
                     </div>
                 </div>
-                <div class="content-section" ng-class="section.cssClass" ng-repeat="section in home.sections">
+                <div class="content-section"
+                     ng-class="section.cssClass"
+                     ng-repeat="section in home.sections"
+                     id="{{ ::section.key }}"
+                     du-smooth-scroll>
                     <div class="content-wrapper">
                         <div class="content-header mode-background">
                             <h1 class="content-heading">

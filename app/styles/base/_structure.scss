@@ -25,13 +25,19 @@ body {
 main {
   background-color: #fff;
   padding: 0 8rem 2rem;
-  width: 66.66666%;
-  float: left;
+  width: 724px;
+  float: right;
 }
 
 header {
   // margin-left: -1.5rem;
   // margin-right: -1.5rem;
+  z-index: 9999;
+
+  &.affix {
+    top: 0;
+    width: 1024px;
+  }
 }
 
 footer {
@@ -43,9 +49,14 @@ aside {
   background-color: $color-sidebar;
   // margin-left: -1.5rem;
   // margin-right: -1.5rem;
-  width: 33.33333%;
+  width: 300px;
+  z-index: 9999;
   float: left;
   padding: 3rem 0;
+
+  &.affix {
+    top: 13rem;
+  }
   & > ul {
     margin-bottom: 0;
     padding: 0 4rem;
@@ -53,9 +64,16 @@ aside {
       padding: .5rem 1rem;
       list-style: none;
       @include clearfix;
-      &.active {
-        background-color: darken($color-sidebar, 10%);
-        border-radius: 3px;
+      & > a {
+        padding: 1px 3px;
+        color: $color-home;
+        &:hover, &:focus, &:visited, &:active {
+            color: $color-home;
+        }
+        &.active {
+            background-color: darken($color-sidebar, 10%);
+            border-radius: 3px;
+        }
       }
     }
   }

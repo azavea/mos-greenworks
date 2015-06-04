@@ -13,7 +13,10 @@
 
     angular.module('gw.views.home', [
         'ui.router',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'duScroll',
+        'gw.affix'
     ])
-    .config(StateConfig);
+    .config(StateConfig)
+    .value('duScrollOffset', 132);
 })();
