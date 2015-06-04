@@ -1,20 +1,32 @@
 .map {
-  top: 0;
   left: 0;
   right: 0;
-  height: 40rem;
   position: fixed !important;
   background-position: center;
   background-repeat: no-repeat;
   background: #666;
+
   .view-map > & {
-    height: 100%;
+    top: 9rem;
+    bottom: 0;
   }
 }
 
 .view-home .map {
   background-image: url("../images/static-map.png");
   background-size: cover;
+  top: 0;
+  height: 40rem;
+}
+
+div.cartodb-tiles-loader {
+    float: right;
+    margin-right: 20px;
+}
+
+div.cartodb-zoom {
+    float: right;
+    margin-right: 20px;
 }
 
 .leaflet-popup-content-wrapper {
