@@ -75,7 +75,9 @@
                             </div>
                             <div class="filter-subcategory-heading">{{ ::projKey }}</div>
                         </div>
-                        <div class="filter-subcategory-item" ng-repeat="(subKey, count) in projectCat">
+                        <div class="filter-subcategory-item"
+                             ng-repeat="(subKey, count) in projectCat"
+                             ng-init="iconUrl = map.iconForCategory(subKey)">
                             <div class="filter-subcategory-checkbox">
                                 <input ng-checked="map.toggles.sub[subKey]"
                                        ng-click="map.onSubFilterClicked(subKey)"
@@ -83,7 +85,7 @@
                             </div>
                             <div class="filter-subcategory-marker">
                                 <div class="marker">
-                                    <i class="fa fa-file button-icon"></i>
+                                    <img ng-if="iconUrl" ng-src="{{ ::iconUrl }}">
                                 </div>
                             </div>
                             <div class="filter-subcategory-heading">{{ ::subKey }} ({{ ::count }})</div>

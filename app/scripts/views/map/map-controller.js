@@ -30,6 +30,7 @@
             ctl.searchText = '';
             ctl.suggest = Geocoder.suggest;
             ctl.search = search;
+            ctl.iconForCategory = Categories.getIcon;
 
             ctl.onProjectFilterClicked = onProjectFilterClicked;
             ctl.onSubFilterClicked = onSubFilterClicked;

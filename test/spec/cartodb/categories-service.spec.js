@@ -87,5 +87,9 @@ describe('gw.cartodb: Categories', function () {
             var keysTwo = ['Access to Healthy Food', 'Green Stormwater Infrastructure', 'New Trees'];
             expect(Categories.getKeysForCategory(categoriesTree, 'Equity')).toEqual(keysTwo);
         });
+
+        it('should ensure that a bad key for icons returns null', function () {
+            expect(Categories.getIcon('IMA BAD KEY')).toBe(null);
+        });
     });
 });
