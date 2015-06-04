@@ -37,7 +37,7 @@
             ctl.onClearClicked = onClearClicked;
             ctl.onHeaderClicked = onHeaderClicked;
 
-            cartodb.createVis('map', 'https://greenworks.cartodb.com/api/v2/viz/33627780-f988-11e4-8ff7-0e0c41326911/viz.json')
+            cartodb.createVis('map', 'https://greenworks.cartodb.com/api/v2/viz/3a833566-03c1-11e5-a4dd-0e4fddd5de28/viz.json')
                 .done(onVisReady, onVisError);
 
             var sql = new cartodb.SQL({ user: Config.cartodb.user });
