@@ -15,19 +15,18 @@
 
 .navbar {
   position: relative;
-  max-height: $navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
+  // max-height: $navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
   margin-bottom: $navbar-margin-bottom;
+  padding: 4rem 2rem;
   border: 1px solid transparent;
   box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.1);
   z-index: 1;
   position: relative;
+  background-color: #3F505B;
 
   // Prevent floats from breaking the navbar
   @include clearfix;
 
-  @media (min-width: $grid-float-breakpoint) {
-    border-radius: $navbar-border-radius;
-  }
 }
 
 
@@ -171,7 +170,6 @@
 
 .navbar-brand {
   float: left;
-  padding: $navbar-padding-vertical $navbar-padding-horizontal;
   font-size: $font-size-large;
   line-height: $line-height-computed;
   height: $navbar-height;
@@ -183,6 +181,13 @@
 
   > img {
     display: block;
+    max-width: 100%;
+    max-width: 22rem;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
   }
 
   @media (min-width: $grid-float-breakpoint) {
@@ -405,6 +410,11 @@
 .navbar-default {
   background-color: $navbar-default-bg;
   border-color: $navbar-default-border;
+
+  &.navbar-map {
+    background-color: #fff;
+    padding: 2rem 2rem;
+  }
 
   .navbar-brand {
     color: $navbar-default-brand-color;

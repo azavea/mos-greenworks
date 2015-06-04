@@ -1,11 +1,14 @@
 .map {
-  top: $navbar-height;
-  bottom: 0;
+  top: 0;
+  left: 0;
   right: 0;
-  left: $sidebar-width;
-  position: absolute !important;
-  &.explore {
-    left: $sidebar-width-minimized;
+  height: 40rem;
+  position: fixed !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background: #666;
+  .view-map > & {
+    height: 100%;
   }
 }
 
@@ -78,25 +81,13 @@
 }
 
 .marker {
-  background-color: #fff;
-  border: 1px solid $color-muted;
-  height: 2.4rem;
-  width: 2.4rem;
-  border-radius: 50%;
-  background-color: $color-energy;
-  text-align: center;
   color: #fff;
-  font-size: 1.1rem;
-  line-height: 2.4rem;
+  background-color: $color-energy;
+  height: 2.2rem;
+  width: 2.2rem;
+  border-radius: 50%;
+  text-align: center;
+  font-size: .9rem;
+  line-height: 2.1rem;
   display: inline-block;
-  cursor: pointer;
-  &:hover {
-    opacity: .5;
-  }
-  &.inactive {
-    background-color: #fff;
-    & > .button-icon {
-      visibility: hidden;
-    }
-  }
 }

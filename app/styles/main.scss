@@ -26,6 +26,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
  */
 @import
   "base/structure",
+  "base/prototype",
   "base/typography",
   "base/mode-colors";
 
@@ -45,9 +46,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
  * Including modules such as sliders, buttons, thumbnails, image uploaders, map, etc
  * Will tend to contain a lot of component files.
  */
-// @import
-//   "components/fancy-links",
-//   "components/buttons";
+@import
+  "components/buttons";
 
 /**
  * Page-specific styles.
