@@ -6,14 +6,17 @@
      * Controller for the gw app home view
      */
     /* ngInject */
-    function HomeController($log, $state, Geocoder) {
+    function HomeController($log, $state, Geocoder, Sections) {
         var ctl = this;
+
         initialize();
 
         function initialize() {
             ctl.searchText = '';
             ctl.suggest = Geocoder.suggest;
             ctl.search = search;
+
+            ctl.sections = Sections;
         }
 
         function search(searchText, magicKey) {

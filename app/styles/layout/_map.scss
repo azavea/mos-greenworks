@@ -12,6 +12,11 @@
   }
 }
 
+.view-home .map {
+  background-image: url("../images/static-map.png");
+  background-size: cover;
+}
+
 .leaflet-popup-content-wrapper {
   border-radius: 0;
 }
