@@ -63,16 +63,19 @@ $brand-danger:          #d9534f;
 $primary-light:         #F0FCEC;
 
 $color-home:            #3f505b;
-$color-explore:            #3f505b;
+$color-sidebar:         #e0e8ed;
+$color-button:          #d2dee4;
+$color-explore:         #3f505b;
 $color-energy:          #de761c;
 $color-economy:         #7eaaab;
 $color-environment:     #83971f;
 $color-engagement:      #d3b14d;
 $color-equity:          #2d597f;
 $color-muted:           #d2dee4;
+$color-background:      #e2e6e3;
 
 
-$nav-color:             #fff;
+$nav-color:             $color-home;
 $nav-side-color:        #4b4b4b;
 
 //== Scaffolding
@@ -159,7 +162,7 @@ $padding-xs-horizontal:     5px;
 $line-height-large:         1.33;
 $line-height-small:         1.5;
 
-$border-radius-base:        0;
+$border-radius-base:        4px;
 $border-radius-large:       6px;
 $border-radius-small:       3px;
 
