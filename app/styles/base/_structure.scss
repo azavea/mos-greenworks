@@ -13,7 +13,7 @@ body {
   font-size: strip-units(rem($font-size-base))+em;
   line-height: $line-height-base;
   color: $text-color;
-  background-color: #fff;
+  background-color: $color-background;
   overflow-x: hidden;
   width: 100%;
   position: relative;
@@ -22,6 +22,64 @@ body {
   min-height: 100%;
 }
 
+main {
+  background-color: #fff;
+  padding: 0 8rem 2rem;
+  width: 724px;
+  float: right;
+}
+
+header {
+  // margin-left: -1.5rem;
+  // margin-right: -1.5rem;
+  z-index: 9999;
+
+  &.affix {
+    top: 0;
+    width: 1024px;
+  }
+}
+
+footer {
+  background-color: $color-background;
+  padding: 6rem 0;
+}
+
+aside {
+  background-color: $color-sidebar;
+  // margin-left: -1.5rem;
+  // margin-right: -1.5rem;
+  width: 300px;
+  z-index: 9999;
+  float: left;
+  padding: 3rem 0;
+
+  &.affix {
+    top: 13rem;
+  }
+  & > ul {
+    margin-bottom: 0;
+    padding: 0 4rem;
+    & > li {
+      padding: .5rem 1rem;
+      list-style: none;
+      @include clearfix;
+      & > a {
+        padding: 1px 3px;
+        color: $color-home;
+        &:hover, &:focus, &:visited, &:active {
+            color: $color-home;
+        }
+        &.active {
+            background-color: darken($color-sidebar, 10%);
+            border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+

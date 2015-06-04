@@ -5,10 +5,11 @@
      * Controller for the gw app map view
      */
     /* ngInject */
-    function MapController($log, $timeout, $stateParams, Categories, Config, SQLFilter) {
+    function MapController($log, $timeout, $stateParams, Categories, Config, Geocoder, SQLFilter) {
 
         var ctl = this;
         var vis = null;
+        var map = null;
         var cdbSubLayer = {};
         var sqlFilter = new SQLFilter({
             tableName: 'master_datalist'
@@ -25,6 +26,10 @@
                 'sub': {}
             };
             ctl.open = {};      // accordion toggle state
+
+            ctl.searchText = '';
+            ctl.suggest = Geocoder.suggest;
+            ctl.search = search;
 
             ctl.onProjectFilterClicked = onProjectFilterClicked;
             ctl.onSubFilterClicked = onSubFilterClicked;
@@ -86,7 +91,7 @@
             vis = newVis;
 
             // Set bounds if applicable
-            var map = vis.getNativeMap();
+            map = vis.getNativeMap();
             var bbox = $stateParams.bbox ? $stateParams.bbox.split(',') : [];
             if (bbox && bbox.length === 4) {
                 var bounds = L.latLngBounds([[bbox[1], bbox[0]], [bbox[3], bbox[2]]]);
@@ -142,6 +147,21 @@
             ctl.open[headerKey] = true;
         }
 
+        function search(searchText, magicKey) {
+            Geocoder.search(searchText, magicKey)
+            .then(function (results) {
+                if (results && results.length) {
+                    var result = results[0];
+                    var sw = L.latLng(result.extent.ymin, result.extent.xmin);
+                    var ne = L.latLng(result.extent.ymax, result.extent.xmax);
+                    var bounds = L.latLngBounds(sw, ne);
+                    map.fitBounds(bounds);
+                }
+            })
+            .catch(function (error) {
+                $log.debug('Error searching:', error);
+            });
+        }
     }
 
     angular.module('gw.views.map')

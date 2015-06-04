@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 
     <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.14/themes/css/cartodb.css" />
 
@@ -23,7 +24,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <ui-view></ui-view>
+        <ui-view></ui-view>
+
+    </body>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -46,26 +49,25 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/config.js"></script>
+        <script src="scripts/affix/module.js"></script>
+        <script src="scripts/affix/affix-directive.js"></script>
         <script src="scripts/cartodb/module.js"></script>
         <script src="scripts/cartodb/categories-service.js"></script>
         <script src="scripts/cartodb/vis-service.js"></script>
         <script src="scripts/cartodb/filter-service.js"></script>
         <script src="scripts/geocoder/module.js"></script>
         <script src="scripts/geocoder/geocoder-service.js"></script>
-        <script src="scripts/views/root/module.js"></script>
-        <script src="scripts/views/root/root-controller.js"></script>
+        <script src="scripts/views/home/module.js"></script>
+        <script src="scripts/views/home/home-controller.js"></script>
+        <script src="scripts/views/home/section-config.js"></script>
         <script src="scripts/views/map/module.js"></script>
         <script src="scripts/views/map/map-controller.js"></script>
-        <script src="scripts/views/tour/module.js"></script>
-        <script src="scripts/views/tour/config-service.js"></script>
-        <script src="scripts/views/tour/popup-config-service.js"></script>
-        <script src="scripts/views/tour/tour-controller.js"></script>
-        <script src="scripts/views/tour/tour-page-controller.js"></script>
         <script src="scripts/app.js"></script>
         <!-- endbuild -->
 </body>

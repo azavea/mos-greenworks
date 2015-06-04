@@ -7,7 +7,7 @@
         $locationProvider.html5Mode(Config.html5Mode.enabled);
         $locationProvider.hashPrefix(Config.html5Mode.prefix);
 
-        $urlRouterProvider.otherwise('/tour/home');
+        $urlRouterProvider.otherwise('/');
     }
 
     /* ngInject */
@@ -25,9 +25,8 @@
      */
     angular.module('gw', [
         'gw.config',
-        'gw.views.root',
-        'gw.views.map',
-        'gw.views.tour'
+        'gw.views.home',
+        'gw.views.map'
     ])
     .config(DefaultRoutingConfig)
     .config(LogConfig);

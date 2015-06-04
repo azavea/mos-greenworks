@@ -1,0 +1,100 @@
+<div class="view-home">
+    <div class="content">
+        <header affix>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="#">
+                                    <img src="/images/branding-greenworks.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-8">
+                            <div id="bs-example-navbar-collapse-1">
+                                <form role="search">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               width="100"
+                                               placeholder="Search address or neighborhood"
+                                               class="form-control navbar-input"
+                                               ng-model="home.searchText"
+                                               typeahead="location as location.text for location in home.suggest($viewValue)"
+                                               typeahead-on-select="home.search($item.text, $item.magicKey)"
+                                               typeahead-wait-ms="300"
+                                               typeahead-min-length="3" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default navbar-input" type="button"><i class="fa fa-search"></i></button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="text-container">
+            <aside affix affix-offset-top="132">
+                <ul>
+                    <li ng-repeat="section in home.sections">
+                        <div class="sidebar-icon">
+                            <img ng-src="/images/icon-{{ ::section.key }}.svg" alt="">
+                        </div>
+                        <a href="#{{ ::section.key}}" class="sidebar-title" du-smooth-scroll du-scrollspy>
+                            {{ ::section.title }}
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <main>
+                <div class="content-section">
+                    <div class="content-block">
+                        <h3>The Report</h3>
+                        <hr class="hr-subheader">
+                        <p>This year’s Greenworks Progress Report reflects the culmination of six years of work toward the energy, environment, equity, economy, and engagement targets established in the initial 2009 plan. With the leadership and support of City staff, community partners, and elected officials, Philadelphia has seen gains in all of the Greenworks focus areas.</p>
+                    </div>
+                </div>
+                <div class="content-section"
+                     ng-class="section.cssClass"
+                     ng-repeat="section in home.sections"
+                     id="{{ ::section.key }}"
+                     du-smooth-scroll>
+                    <div class="content-wrapper">
+                        <div class="content-header mode-background">
+                            <h1 class="content-heading">
+                                <img ng-src="/images/logo-{{ ::section.key }}.svg" alt="">
+                                {{ ::section.title }}
+                            </h1>
+                            <div class="button-map circle" ui-sref="map">
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-include src="'/scripts/views/home/sections/' + section.key + '-partial.html'"></ng-include>
+                    <div class="button-map" ui-sref="map">
+                        Explore Map
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div id="map-image" class="map"></div>
+    </div>
+    <footer class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h4>Credits</h4>
+                This tool was developed for the Mayor’s Office of Sustainability (MOS) by Azavea.
+            </div>
+            <div class="col-sm-4">
+                <h4>Contact</h4>
+                Questions about the tool, the data, or the Greenworks program can be directed to benchmarkinghelp@phila.gov.
+            </div>
+            <div class="col-sm-4">
+                <h4>Full Report</h4>
+                Download the full PDF report Here.
+            </div>
+        </div>
+    </footer>
+</div>
