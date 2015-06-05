@@ -682,3 +682,8 @@
 .map-search {
   width: 30rem !important;
 }
+
+nav .dropdown-menu > li > a {
+  overflow: hidden;
+  cursor: pointer;
+}
