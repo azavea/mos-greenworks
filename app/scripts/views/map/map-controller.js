@@ -11,6 +11,13 @@
         var vis = null;
         var map = null;
         var cdbSubLayer = {};
+        var searchBBox = [
+            Config.bounds.southWest.lng,
+            Config.bounds.southWest.lat,
+            Config.bounds.northEast.lng,
+            Config.bounds.northEast.lat
+        ].join(',');
+        var searchBounds = L.latLngBounds(Config.bounds.southWest, Config.bounds.northEast);
         var sqlFilter = new SQLFilter({
             tableName: 'master_datalist'
         });
@@ -20,6 +27,7 @@
             ctl.categories = {};
             ctl.filters = [];
             ctl.showCategories = false;
+            ctl.showFilters = true;
             ctl.toggles = {
                 // Namespace because some project and subcategories have the same names
                 'project': {},
@@ -28,11 +36,12 @@
             ctl.open = {};      // accordion toggle state
 
             ctl.searchText = '';
-            ctl.suggest = Geocoder.suggest;
             ctl.search = search;
+            ctl.suggest = Geocoder.suggest;
             ctl.iconForCategory = Categories.getIcon;
 
             ctl.onProjectFilterClicked = onProjectFilterClicked;
+            ctl.onSearchButtonClicked = onSearchButtonClicked;
             ctl.onSubFilterClicked = onSubFilterClicked;
             ctl.onResetClicked = onResetClicked;
             ctl.onClearClicked = onClearClicked;
@@ -142,21 +151,38 @@
         }
 
         function onHeaderClicked(headerKey) {
-            angular.forEach(ctl.open, function (value, key) {
-                ctl.open[key] = false;
-            });
-            ctl.open[headerKey] = true;
+            if (ctl.open[headerKey] === true) {
+                ctl.open[headerKey] = false;
+            } else {
+                angular.forEach(ctl.open, function (value, key) {
+                    ctl.open[key] = false;
+                });
+                ctl.open[headerKey] = true;
+            }
         }
 
-        function search(searchText, magicKey) {
-            Geocoder.search(searchText, magicKey)
+        function onSearchButtonClicked() {
+            search(ctl.searchText, null, {
+                bbox: searchBBox
+            });
+        }
+
+        function search(searchText, magicKey, options) {
+            Geocoder.search(searchText, magicKey, options)
             .then(function (results) {
                 if (results && results.length) {
                     var result = results[0];
-                    var sw = L.latLng(result.extent.ymin, result.extent.xmin);
-                    var ne = L.latLng(result.extent.ymax, result.extent.xmax);
-                    var bounds = L.latLngBounds(sw, ne);
-                    map.fitBounds(bounds);
+                    var latLng = L.latLng(result.feature.geometry.y, result.feature.geometry.x);
+                    if (searchBounds.contains(latLng)) {
+                        var sw = L.latLng(result.extent.ymin, result.extent.xmin);
+                        var ne = L.latLng(result.extent.ymax, result.extent.xmax);
+                        var bounds = L.latLngBounds(sw, ne);
+                        map.fitBounds(bounds);
+                    } else {
+                        $log.debug('We could not find ' + searchText + ' near Philly');
+                    }
+                } else {
+                    $log.debug('No results near Philly for ' + searchText);
                 }
             })
             .catch(function (error) {

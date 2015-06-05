@@ -21,7 +21,9 @@
                                        typeahead-wait-ms="300"
                                        typeahead-min-length="3" />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                    <button class="btn btn-default" type="button" ng-click="map.onSearchButtonClicked()">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </span>
                             </div>
                         </form>
@@ -31,7 +33,7 @@
         </nav>
     </header>
     <div class="filters">
-        <div class="filter-menu">
+        <div class="filter-menu" ng-click="map.showFilters = !map.showFilters">
             <div class="filter-header clearfix">
                 <div class="filter-header-icon">
                     <div class="filter-header-icon-container">
@@ -43,12 +45,12 @@
                     </div>
                 </div>
                 <div class="filter-header-heading vertical-align">Filters</div>
-                <div class="filter-header-button vertical-align">
+                <div class="filter-header-button vertical-align" ng-click="$event.stopPropagation()">
                     <span ng-click="map.onResetClicked()">Reset</span> | <span ng-click="map.onClearClicked()">Clear</span>
                 </div>
             </div>
         </div>
-        <div class="filter-individuals">
+        <div class="filter-individuals" ng-show="map.showFilters">
             <div class="filter"
                  ng-class="'mode-{{::key | lowercase}}'"
                  ng-repeat="(key, section) in map.categories"

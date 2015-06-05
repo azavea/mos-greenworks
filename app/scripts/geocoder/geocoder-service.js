@@ -3,7 +3,7 @@
     'use strict';
 
     /* ngInject */
-    function Geocoder ($http, $q, Config) {
+    function Geocoder ($http, $log, $q, Config) {
 
         // Private variables
         var searchUrl = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find';
@@ -46,17 +46,19 @@
 
         // Hoisted function definitions
 
-        function search(text, magicKey) {
+        function search(text, magicKey, options) {
+            options = options || {};
+            var defaults = {
+                'text': text,
+                'category': searchCategories,
+                'outFields': searchOutFields,
+                'maxLocations': maxResults,
+                'magicKey': magicKey || null,
+                'f': 'pjson'
+            };
             var dfd = $q.defer();
             $http.get(searchUrl, {
-                params: {
-                    'text': text,
-                    'category': searchCategories,
-                    'outFields': searchOutFields,
-                    'maxLocations': maxResults,
-                    'magicKey': magicKey || null,
-                    'f': 'pjson'
-                }
+                params: angular.extend({}, defaults, options)
             }).success(function (data) {
                 dfd.resolve(data.locations);
             }).error(function (error) {

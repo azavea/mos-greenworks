@@ -17,7 +17,8 @@ body {
   overflow-x: hidden;
   width: 100%;
   position: relative;
-  font-feature-settings: "kern" 1;
+  // Makes all text disappear in IE
+  //font-feature-settings: "kern" 1;
   text-rendering: geometricPrecision;
   min-height: 100%;
 }
