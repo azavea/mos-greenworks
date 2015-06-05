@@ -18,7 +18,7 @@
         var searchOutFields = 'StAddr,City,Postal';
         var searchCategories = [
             'Street Address',
-            'Neighborhood',
+            'Point Address',
             'City'
         ].join(',');
 
