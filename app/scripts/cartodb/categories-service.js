@@ -2,6 +2,9 @@
  * Get and store the configuration for data section, projects and subcategories
  * Stores data as tree and list
  *
+ * Categories contains two special cases, Bike Lanes and Bike Trails, which are handled in
+ * MapController
+ *
  * Usage:
  *     Get data with get(), then use other helper methods after promise resolves
  *
@@ -68,7 +71,7 @@
             } else {
                 sql.execute(categoriesQuery).done(function (data) {
                     categoriesList = data.rows;
-                    var newCategories = parseResponse(data.rows);
+                    var newCategories = parseResponse(categoriesList);
                     categoriesTree = newCategories;
                     dfd.resolve(categoriesTree);
                 }).error(function (error) {

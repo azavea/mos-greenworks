@@ -11,6 +11,7 @@
         var vis = null;
         var map = null;
         var geocodeMarker = null;
+        var cdbLayer = {};
         var cdbSubLayer = {};
         var sqlFilter = new SQLFilter({
             tableName: 'master_datalist'
@@ -62,13 +63,13 @@
 
             var subKeys = Categories.getKeysForCategory(ctl.categories, key);
             angular.forEach(subKeys, function (subKey) {
-                ctl.toggles.sub[subKey] = val;
+                toggleSubKey(subKey, val);
             });
             updateFilter();
         }
 
         function onSubFilterClicked(key) {
-            ctl.toggles.sub[key] = !ctl.toggles.sub[key];
+            toggleSubKey(key, !ctl.toggles.sub[key]);
             var projKey = Categories.getSubcategoryParentKey(key);
             // if subKey is now true, set parent to true
             if (ctl.toggles.sub[key] === true) {
@@ -88,6 +89,29 @@
             updateFilter();
         }
 
+        // Any time a sub key it set, it must be done via this method
+        // so that the check for special keys occurs
+        function toggleSubKey(key, value) {
+            ctl.toggles.sub[key] = value;
+
+            // Special case for bike lanes and bike trails
+            // bike lanes switch controls visibility for these layers
+            if (key === 'Bike Lanes') {
+                setSublayerVisibility(Config.cartodb.layers.bikeLanes, ctl.toggles.sub[key]);
+            } else if (key === 'Bike Trails') {
+                setSublayerVisibility(Config.cartodb.layers.bikeTrails, ctl.toggles.sub[key]);
+            }
+        }
+
+        function setSublayerVisibility(layerId, visibility) {
+            var layer = cdbLayer.getSubLayer(layerId);
+            if (visibility === true) {
+                layer.show();
+            } else {
+                layer.hide();
+            }
+        }
+
         function onVisReady(newVis) {
             vis = newVis;
 
@@ -103,8 +127,9 @@
 
             // Set cartodb layers and sql
             var layerId = Config.cartodb.layerId;
-            var sublayerId = Config.cartodb.sublayerId;
-            cdbSubLayer = vis.getLayers()[layerId].getSubLayer(sublayerId);
+            var categoriesLayerId = Config.cartodb.layers.categories;
+            cdbLayer = vis.getLayers()[layerId];
+            cdbSubLayer = cdbLayer.getSubLayer(categoriesLayerId);
             cdbSubLayer.setInteraction(true);
             cdbSubLayer.setSQL(sqlFilter.makeSql());
         }
@@ -135,7 +160,7 @@
 
         function setAllToggles(value) {
             angular.forEach(ctl.toggles.sub, function (v, key) {
-                ctl.toggles.sub[key] = value;
+                toggleSubKey(key, value);
             });
             angular.forEach(ctl.toggles.project, function (v, key) {
                 ctl.toggles.project[key] = value;
