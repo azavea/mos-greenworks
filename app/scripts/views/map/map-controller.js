@@ -20,6 +20,7 @@
             ctl.categories = {};
             ctl.filters = [];
             ctl.showCategories = false;
+            ctl.showFilters = true;
             ctl.toggles = {
                 // Namespace because some project and subcategories have the same names
                 'project': {},
