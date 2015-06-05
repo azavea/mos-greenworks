@@ -143,10 +143,14 @@
         }
 
         function onHeaderClicked(headerKey) {
-            angular.forEach(ctl.open, function (value, key) {
-                ctl.open[key] = false;
-            });
-            ctl.open[headerKey] = true;
+            if (ctl.open[headerKey] === true) {
+                ctl.open[headerKey] = false;
+            } else {
+                angular.forEach(ctl.open, function (value, key) {
+                    ctl.open[key] = false;
+                });
+                ctl.open[headerKey] = true;
+            }
         }
 
         function search(searchText, magicKey) {
