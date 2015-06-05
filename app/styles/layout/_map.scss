@@ -24,12 +24,14 @@
   }
 }
 
-.view-map .leaflet-tiles-loader {
+.view-map .leaflet-tiles-loader,
+.view-map .cartodb-tiles-loader {
     float: right;
     margin-right: 20px;
 }
 
-.view-map .leaflet-zoom {
+.view-map .leaflet-zoom,
+.view-map .cartodb-zoom {
     float: right;
     margin-right: 20px;
 }
