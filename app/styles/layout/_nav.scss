@@ -23,6 +23,7 @@
   z-index: 1;
   position: relative;
   background-color: #3F505B;
+  z-index: 2000;
 
   // Prevent floats from breaking the navbar
   @include clearfix;
@@ -686,4 +687,8 @@
 nav .dropdown-menu > li > a {
   overflow: hidden;
   cursor: pointer;
+}
+
+.view-home button.navbar-input {
+  width: 5rem;
 }
