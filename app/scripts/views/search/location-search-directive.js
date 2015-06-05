@@ -3,7 +3,7 @@
     'use strict';
 
     /* ngInject */
-    function LocationSearchController($log, $state, Config, Geocoder) {
+    function LocationSearchController($log, $scope, Config, Geocoder) {
 
         var searchBBox = [
             Config.bounds.southWest.lng,
@@ -21,6 +21,7 @@
             ctl.suggest = Geocoder.suggest;
             ctl.search = search;
 
+            ctl.clearError = clearError;
             ctl.onSearchButtonClicked = onSearchButtonClicked;
         }
 
@@ -34,17 +35,30 @@
                         var sw = L.latLng(result.extent.ymin, result.extent.xmin);
                         var ne = L.latLng(result.extent.ymax, result.extent.xmax);
                         var bounds = L.latLngBounds(sw, ne);
-                        $state.go('map', { bbox: bounds.toBBoxString() });
+                        $scope.onResultFound()(bounds);
                     } else {
-                        $log.debug('We could not find ' + searchText + ' near Philly');
+                        showError('No results near Philadelphia');
                     }
                 } else {
-                    $log.debug('No results near Philly for ' + searchText);
+                    showError('No results');
                 }
             })
             .catch(function (error) {
-                $log.debug('Error searching:', error);
+                showError(error);
             });
+        }
+
+        function showError(msg) {
+            ctl.error = msg;
+            var errorFunction = $scope.onResultError();
+            if (errorFunction) {
+                errorFunction(msg);
+            }
+            $log.debug(msg);
+        }
+
+        function clearError() {
+            ctl.error = null;
         }
 
         function onSearchButtonClicked() {

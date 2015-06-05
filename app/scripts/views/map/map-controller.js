@@ -31,6 +31,7 @@
             ctl.iconForCategory = Categories.getIcon;
 
             ctl.onProjectFilterClicked = onProjectFilterClicked;
+            ctl.onSearchResult = onSearchResult;
             ctl.onSubFilterClicked = onSubFilterClicked;
             ctl.onResetClicked = onResetClicked;
             ctl.onClearClicked = onClearClicked;
@@ -148,6 +149,10 @@
                 });
                 ctl.open[headerKey] = true;
             }
+        }
+
+        function onSearchResult(bounds) {
+            map.fitBounds(bounds);
         }
     }
 

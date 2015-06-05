@@ -6,7 +6,7 @@
      * Controller for the gw app home view
      */
     /* ngInject */
-    function HomeController(Sections) {
+    function HomeController($state, Sections) {
 
         var ctl = this;
 
@@ -14,6 +14,12 @@
 
         function initialize() {
             ctl.sections = Sections;
+
+            ctl.onSearchResult = onSearchResult;
+        }
+
+        function onSearchResult(bounds) {
+            $state.go('map', { bbox: bounds.toBBoxString() });
         }
     }
 
