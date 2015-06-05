@@ -97,9 +97,13 @@
                 return null;
             }
             var category = _.find(categoriesList, function (c) {
+                /* jshint camelcase: false*/
                 return c.sub_category === subCategory;
+                /* jshint camelcase: true */
             });
+            /* jshint camelcase: false*/
             return category ? category.project_category : null;
+            /* jshint camelcase: true*/
         }
 
         /**
@@ -123,7 +127,9 @@
         function allSubKeys() {
             var keys = {};
             angular.forEach(categoriesList, function (category) {
+                /* jshint camelcase: false*/
                 var key = category.sub_category;
+                /* jshint camelcase: true*/
                 keys[key] = true;
             });
             return keys;

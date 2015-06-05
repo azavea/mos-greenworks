@@ -39,6 +39,8 @@ module.exports = function(config) {
       'app/scripts/cartodb/**.js',
       'app/scripts/geocoder/module.js',
       'app/scripts/geocoder/**.js',
+      'app/scripts/views/search/module.js',
+      'app/scripts/views/search/**.js',
       'app/scripts/views/home/module.js',
       'app/scripts/views/home/**.js',
       'app/scripts/views/map/module.js',

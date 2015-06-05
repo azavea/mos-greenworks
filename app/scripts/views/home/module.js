@@ -13,9 +13,9 @@
 
     angular.module('gw.views.home', [
         'ui.router',
-        'ui.bootstrap',
         'duScroll',
-        'gw.affix'
+        'gw.affix',
+        'gw.views.search'
     ])
     .config(StateConfig)
     .value('duScrollOffset', 132);
