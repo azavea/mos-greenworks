@@ -58,6 +58,10 @@ aside {
   &.affix {
     top: 13rem;
   }
+
+  &.affix + main {
+    margin-top: 132px;
+  }
   & > ul {
     margin-bottom: 0;
     padding: 0 4rem;
