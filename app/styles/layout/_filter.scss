@@ -132,7 +132,6 @@
   & > .filter-subcategory-heading {
     font-weight: bold;
     width: 90%;
-    margin-left: 10%;
   }
 }
 
@@ -153,6 +152,13 @@
   float: left;
   width: 75%;
   line-height: 1.5;
+}
+
+.filter-category-checkbox {
+  float: left;
+  width: 5%;
+  line-height: 1.5;
+  margin-left: 5%;
 }
 
 .filter-subcategory-checkbox {

@@ -14,6 +14,30 @@
     /* ngInject */
     function Categories ($log, $q) {
 
+        var iconUrl = 'https://s3.amazonaws.com/s3.azavea.com/images/gwicons/:icon.svg';
+        var iconMap = {
+            'Bicycle Infrastructure': 'ic_bike',
+            'IndeGo Stations': 'ic_indego4',
+            'Pedestrian Space': 'ic_pedestrian',
+            'SEPTA Climate Resilience': 'ic_climateResilience',
+            'City LEED buildings': 'ic_leed',
+            'Energy Efficiency Projects in City-Owned Buildings': 'ic_energyEfficiency',
+            'Guaranteed Energy Savings Project': 'ic_energySavings',
+            'Greenworks Small Business Loans': 'ic_loans',
+            'SEPTA Energy Management': 'ic_energyManagement',
+            'Community Composting Sites': 'ic_composting',
+            'Air Monitoring Stations': 'ic_airMonitor',
+            'Alternative Energy Vehicle Fueling Stations': 'ic_altEnergy2',
+            'SEPTA Hybrid Bus Depots': 'ic_hybridBus',
+            'Commercial Kitchen Center': 'ic_commercialKitchen',
+            'Farmers\' Markets': 'ic_farmersMarket',
+            'Food Co-op': 'ic_foodCoop',
+            'New Supermarket': 'ic_supermarket',
+            'Philadelphia Prison Orchard Project': 'ic_orchard',
+            'Public Food Market': 'ic_publicFoodMarket',
+            'Green Stormwater Infrastructure': 'ic_stormwater2'
+        };
+
         var categoriesList = null;
         var categoriesTree = null;
         var categoriesQuery = [
@@ -24,6 +48,7 @@
 
         var module = {
             get: get,
+            getIcon: getIcon,
             getSubcategoryParentKey: getSubcategoryParentKey,
             allProjectKeys: allProjectKeys,
             allSubKeys: allSubKeys,
@@ -51,6 +76,14 @@
                 });
             }
             return dfd.promise;
+        }
+
+        function getIcon(subCategory) {
+            var icon = iconMap[subCategory];
+            if (!icon) {
+                return null;
+            }
+            return iconUrl.replace(':icon', icon);
         }
 
         /**
