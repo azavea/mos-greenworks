@@ -10,10 +10,10 @@
   position: fixed;
   z-index: 2000;
   top: 12rem;
-  bottom: 0;
   overflow-y: auto;
   width: $filter-width;
   left: 2rem;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
 }
 
 .filter-individuals {
@@ -24,7 +24,8 @@
   overflow-y: auto;
   width: $filter-width;
   left: 2rem;
-  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
 }
 
 .filter-header {
@@ -92,6 +93,7 @@
 
 .filter-wrapper {
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
+  pointer-events: all;
 }
 
 .filter-menu {
