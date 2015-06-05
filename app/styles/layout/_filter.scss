@@ -14,7 +14,6 @@
   overflow-y: auto;
   width: $filter-width;
   left: 2rem;
-  box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.1);
 }
 
 .filter-individuals {
@@ -25,7 +24,7 @@
   overflow-y: auto;
   width: $filter-width;
   left: 2rem;
-  box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);;
 }
 
 .filter-header {
@@ -91,8 +90,11 @@
   font-size: $font-size-h4;
 }
 
-.filter-menu {
+.filter-wrapper {
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.filter-menu {
   margin-bottom: 1rem;
 
   .filter-header-button {
@@ -101,6 +103,10 @@
     line-height: 1;
     color: inherit;
     font-size: 100%;
+  }
+
+  .filter-header {
+    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
   }
 
   .filter-header-heading {
