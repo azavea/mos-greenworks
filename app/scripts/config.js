@@ -21,6 +21,12 @@
             layerId: 1,
             sublayerId: 2
         },
+        search: {
+            zoom: {
+                address: 17,
+                neighborhood: 9
+            }
+        },
         bounds: {
             northEast: {
                 lat: 40.148059,

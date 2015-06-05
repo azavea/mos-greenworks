@@ -10,6 +10,7 @@
         var ctl = this;
         var vis = null;
         var map = null;
+        var geocodeMarker = null;
         var cdbSubLayer = {};
         var sqlFilter = new SQLFilter({
             tableName: 'master_datalist'
@@ -92,10 +93,12 @@
 
             // Set bounds if applicable
             map = vis.getNativeMap();
-            var bbox = $stateParams.bbox ? $stateParams.bbox.split(',') : [];
-            if (bbox && bbox.length === 4) {
-                var bounds = L.latLngBounds([[bbox[1], bbox[0]], [bbox[3], bbox[2]]]);
-                map.fitBounds(bounds);
+            if ($stateParams.lat && $stateParams.lng && $stateParams.zoom) {
+                var lat = parseFloat($stateParams.lat);
+                var lng = parseFloat($stateParams.lng);
+                var zoom = parseInt($stateParams.zoom, 10);
+                var latLng = L.latLng(lat, lng);
+                onSearchResult(latLng, zoom);
             }
 
             // Set cartodb layers and sql
@@ -151,8 +154,14 @@
             }
         }
 
-        function onSearchResult(bounds) {
-            map.fitBounds(bounds);
+        function onSearchResult(center, zoom) {
+            map.setView(center, zoom);
+            if (!geocodeMarker) {
+                geocodeMarker = L.marker(center);
+                geocodeMarker.addTo(map);
+            } else {
+                geocodeMarker.setLatLng(center);
+            }
         }
     }
 

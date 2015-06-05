@@ -4,7 +4,7 @@
     /* ngInject */
     function StateConfig($stateProvider) {
         $stateProvider.state('map', {
-            url: '/map?bbox',
+            url: '/map?lat&lng&zoom',
             templateUrl: 'scripts/views/map/map-partial.html',
             controller: 'MapController',
             controllerAs: 'map'

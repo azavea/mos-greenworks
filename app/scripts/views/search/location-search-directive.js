@@ -32,10 +32,9 @@
                     var result = results[0];
                     var latLng = L.latLng(result.feature.geometry.y, result.feature.geometry.x);
                     if (searchBounds.contains(latLng)) {
-                        var sw = L.latLng(result.extent.ymin, result.extent.xmin);
-                        var ne = L.latLng(result.extent.ymax, result.extent.xmax);
-                        var bounds = L.latLngBounds(sw, ne);
-                        $scope.onResultFound()(bounds);
+                        // TODO: Determine if neighborhood or address result and properly
+                        // set zoom parameter
+                        $scope.onResultFound()(latLng, Config.search.zoom.address);
                     } else {
                         showError('No results near Philadelphia');
                     }

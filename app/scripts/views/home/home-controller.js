@@ -18,8 +18,12 @@
             ctl.onSearchResult = onSearchResult;
         }
 
-        function onSearchResult(bounds) {
-            $state.go('map', { bbox: bounds.toBBoxString() });
+        function onSearchResult(center, zoom) {
+            $state.go('map', {
+                lat: center.lat,
+                lng: center.lng,
+                zoom: zoom
+            });
         }
     }
 
