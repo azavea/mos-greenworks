@@ -19,10 +19,11 @@
   margin-bottom: $navbar-margin-bottom;
   padding: 4rem 2rem;
   border: 1px solid transparent;
-  box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);;
   z-index: 1;
   position: relative;
   background-color: #3F505B;
+  z-index: 2000;
 
   // Prevent floats from breaking the navbar
   @include clearfix;
@@ -677,4 +678,17 @@
       }
     }
   }
+}
+
+.map-search {
+  width: 30rem !important;
+}
+
+nav .dropdown-menu > li > a {
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.view-home button.navbar-input {
+  width: 5rem;
 }

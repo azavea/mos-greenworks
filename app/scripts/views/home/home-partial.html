@@ -26,11 +26,8 @@
             <aside affix affix-offset-top="132">
                 <ul>
                     <li ng-repeat="section in home.sections">
-                        <div class="sidebar-icon">
-                            <img ng-src="/images/icon-{{ ::section.key }}.svg" alt="">
-                        </div>
                         <a href="#{{ ::section.key}}" class="sidebar-title" du-smooth-scroll du-scrollspy>
-                            {{ ::section.title }}
+                            <img ng-src="/images/icon-{{ ::section.key }}.svg" alt=""> {{ ::section.title }}
                         </a>
                     </li>
                 </ul>
