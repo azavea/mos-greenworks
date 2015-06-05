@@ -5,19 +5,12 @@
      * Controller for the gw app map view
      */
     /* ngInject */
-    function MapController($log, $timeout, $stateParams, Categories, Config, Geocoder, SQLFilter) {
+    function MapController($log, $timeout, $stateParams, Categories, Config, SQLFilter) {
 
         var ctl = this;
         var vis = null;
         var map = null;
         var cdbSubLayer = {};
-        var searchBBox = [
-            Config.bounds.southWest.lng,
-            Config.bounds.southWest.lat,
-            Config.bounds.northEast.lng,
-            Config.bounds.northEast.lat
-        ].join(',');
-        var searchBounds = L.latLngBounds(Config.bounds.southWest, Config.bounds.northEast);
         var sqlFilter = new SQLFilter({
             tableName: 'master_datalist'
         });
@@ -35,13 +28,9 @@
             };
             ctl.open = {};      // accordion toggle state
 
-            ctl.searchText = '';
-            ctl.search = search;
-            ctl.suggest = Geocoder.suggest;
             ctl.iconForCategory = Categories.getIcon;
 
             ctl.onProjectFilterClicked = onProjectFilterClicked;
-            ctl.onSearchButtonClicked = onSearchButtonClicked;
             ctl.onSubFilterClicked = onSubFilterClicked;
             ctl.onResetClicked = onResetClicked;
             ctl.onClearClicked = onClearClicked;
@@ -159,35 +148,6 @@
                 });
                 ctl.open[headerKey] = true;
             }
-        }
-
-        function onSearchButtonClicked() {
-            search(ctl.searchText, null, {
-                bbox: searchBBox
-            });
-        }
-
-        function search(searchText, magicKey, options) {
-            Geocoder.search(searchText, magicKey, options)
-            .then(function (results) {
-                if (results && results.length) {
-                    var result = results[0];
-                    var latLng = L.latLng(result.feature.geometry.y, result.feature.geometry.x);
-                    if (searchBounds.contains(latLng)) {
-                        var sw = L.latLng(result.extent.ymin, result.extent.xmin);
-                        var ne = L.latLng(result.extent.ymax, result.extent.xmax);
-                        var bounds = L.latLngBounds(sw, ne);
-                        map.fitBounds(bounds);
-                    } else {
-                        $log.debug('We could not find ' + searchText + ' near Philly');
-                    }
-                } else {
-                    $log.debug('No results near Philly for ' + searchText);
-                }
-            })
-            .catch(function (error) {
-                $log.debug('Error searching:', error);
-            });
         }
     }
 

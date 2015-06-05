@@ -9,23 +9,8 @@
                 </div>
                 <div id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <form class="navbar-form navbar-left" role="search">
-                            <div class="input-group">
-                                <input type="text"
-                                       width="100"
-                                       placeholder="Search address or neighborhood"
-                                       class="form-control"
-                                       ng-model="map.searchText"
-                                       typeahead="location as location.text for location in map.suggest($viewValue)"
-                                       typeahead-on-select="map.search($item.text, $item.magicKey)"
-                                       typeahead-wait-ms="300"
-                                       typeahead-min-length="3" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" ng-click="map.onSearchButtonClicked()">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
+                        <form role="search" class="navbar-form navbar-left">
+                            <location-search></location-search>
                         </form>
                     </ul>
                 </div>

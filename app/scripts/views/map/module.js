@@ -15,7 +15,7 @@
         'ui.router',
         'ui.bootstrap',
         'cartodb',
-        'gw.geocoder'
+        'gw.views.search'
     ])
     .config(StateConfig);
 })();

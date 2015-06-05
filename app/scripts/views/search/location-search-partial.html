@@ -1,0 +1,20 @@
+<form role="search">
+    <div class="input-group">
+        <input type="text"
+               width="100"
+               placeholder="Search address or neighborhood"
+               class="form-control navbar-input"
+               ng-model="search.searchText"
+               typeahead="location as location.text for location in search.suggest($viewValue)"
+               typeahead-on-select="search.search($item.text, $item.magicKey)"
+               typeahead-wait-ms="300"
+               typeahead-min-length="3" />
+        <span class="input-group-btn">
+            <button class="btn btn-default navbar-input"
+                    type="button"
+                    ng-click="search.onSearchButtonClicked()">
+                <i class="fa fa-search"></i>
+            </button>
+        </span>
+    </div>
+</form>
