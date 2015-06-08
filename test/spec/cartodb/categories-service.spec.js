@@ -75,7 +75,7 @@ describe('gw.cartodb: Categories', function () {
         });
 
         it('should return all bottom level keys', function () {
-            expect(_.keys(Categories.allSubKeys()).length).toEqual(23);
+            expect(_.keys(Categories.allSubKeys()).length).toEqual(24);
             // TODO: Check the actual key values?
         });
 
