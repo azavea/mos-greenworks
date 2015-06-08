@@ -57,26 +57,30 @@
                         <div class="filter-subcategory" ng-repeat="(projKey, projectCat) in section">
                             <div class="filter-subcategory-header">
                                 <div class="filter-category-checkbox">
-                                    <input ng-checked="map.toggles.project[projKey]"
+                                    <input id="projcategory-{{$id}}"
+                                           ng-checked="map.toggles.project[projKey]"
                                            ng-click="map.onProjectFilterClicked(projKey)"
                                            type="checkbox">
                                 </div>
-                                <div class="filter-subcategory-heading">{{ ::projKey }}</div>
+                                <label for="projcategory-{{$id}}" class="filter-subcategory-heading">{{ ::projKey }}</label>
                             </div>
                             <div class="filter-subcategory-item"
                                  ng-repeat="(subKey, count) in projectCat"
                                  ng-init="iconUrl = map.iconForCategory(subKey)">
                                 <div class="filter-subcategory-checkbox">
-                                    <input ng-checked="map.toggles.sub[subKey]"
+                                    <input id="subcategory-{{$id}}"
+                                           ng-checked="map.toggles.sub[subKey]"
                                            ng-click="map.onSubFilterClicked(subKey)"
                                            type="checkbox">
                                 </div>
-                                <div class="filter-subcategory-marker">
-                                    <div class="marker">
-                                        <img ng-if="iconUrl" ng-src="{{ ::iconUrl }}">
+                                <label for="subcategory-{{$id}}">
+                                    <div class="filter-subcategory-marker">
+                                        <div class="marker">
+                                            <img ng-if="iconUrl" ng-src="{{ ::iconUrl }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="filter-subcategory-heading">{{ ::subKey }} ({{ ::count }})</div>
+                                    <span class="filter-subcategory-heading">{{ ::subKey }} ({{ ::count }})</span>
+                                </label>
                             </div>
                         </div>
                     </div>

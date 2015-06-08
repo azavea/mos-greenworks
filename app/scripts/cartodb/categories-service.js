@@ -2,6 +2,9 @@
  * Get and store the configuration for data section, projects and subcategories
  * Stores data as tree and list
  *
+ * Categories contains two special cases, Bike Lanes and Bike Trails, which are handled in
+ * MapController
+ *
  * Usage:
  *     Get data with get(), then use other helper methods after promise resolves
  *
@@ -67,8 +70,8 @@
                 dfd.resolve(categoriesTree);
             } else {
                 sql.execute(categoriesQuery).done(function (data) {
-                    categoriesList = data.rows;
-                    var newCategories = parseResponse(data.rows);
+                    categoriesList = addSpecialCases(data.rows);
+                    var newCategories = parseResponse(categoriesList);
                     categoriesTree = newCategories;
                     dfd.resolve(categoriesTree);
                 }).error(function (error) {
@@ -193,6 +196,33 @@
                 }
             });
             return data;
+        }
+
+        // Add the two special cases, the toggles who have data displayed in separate
+        // cartodb vis layers.
+        // Only adds them if they don't exist in the response already
+        // Protects against these sub_categories not existing in the response from
+        // the 'master_datalist' table
+        function addSpecialCases(rows) {
+            /* jshint camelcase: false */
+            if (!_.find(rows, function (row) { return row.sub_category === 'Bike Lanes'; } )) {
+                rows.push({
+                    count: 4063,
+                    project_category: 'Bicycle and Pedestrian Infrastructure',
+                    section: 'Economy',
+                    sub_category: 'Bike Lanes'
+                });
+            }
+            if (!_.find(rows, function (row) { return row.sub_category === 'Bike Trails'; } )) {
+                rows.push({
+                    count: 44,
+                    project_category: 'Bicycle and Pedestrian Infrastructure',
+                    section: 'Economy',
+                    sub_category: 'Bike Trails'
+                });
+            }
+            /* jshint camelcase: true */
+            return rows;
         }
     }
 

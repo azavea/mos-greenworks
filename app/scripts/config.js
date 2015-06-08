@@ -19,7 +19,11 @@
         cartodb: {
             user: 'greenworks',
             layerId: 1,
-            sublayerId: 2
+            layers: {
+                categories: 2,
+                bikeLanes: 1,
+                bikeTrails: 0
+            }
         },
         search: {
             zoom: {
