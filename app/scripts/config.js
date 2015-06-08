@@ -28,7 +28,7 @@
         search: {
             zoom: {
                 address: 17,
-                neighborhood: 9
+                neighborhood: 15
             }
         },
         bounds: {

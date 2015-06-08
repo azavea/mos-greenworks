@@ -15,11 +15,8 @@
             Config.bounds.northEast.lat
         ].join(',');
         var maxResults = 10;
-        var searchOutFields = 'StAddr,City,Postal';
         var searchCategories = [
-            'Address',
-            'Postal',
-            'City'
+            'Street Address'
         ].join(',');
 
         // Public Interface
@@ -49,16 +46,19 @@
         function search(text, magicKey, options) {
             options = options || {};
             var defaults = {
-                'text': text,
-                'category': searchCategories,
-                'outFields': searchOutFields,
-                'maxLocations': maxResults,
-                'magicKey': magicKey || null,
-                'f': 'pjson'
+                text: text,
+                bbox: boundingBox,
+                category: searchCategories,
+                maxLocations: maxResults,
+                f: 'pjson'
             };
+            var params = angular.extend({}, defaults, options);
+            if (magicKey) {
+                options.magicKey = magicKey;
+            }
             var dfd = $q.defer();
             $http.get(searchUrl, {
-                params: angular.extend({}, defaults, options)
+                params: params
             }).success(function (data) {
                 dfd.resolve(data.locations);
             }).error(function (error) {

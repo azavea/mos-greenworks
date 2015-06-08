@@ -3,7 +3,7 @@
     'use strict';
 
     /* ngInject */
-    function LocationSearchController($log, $scope, Config, Geocoder) {
+    function LocationSearchController($log, $q, $scope, Config, Geocoder) {
 
         var searchBBox = [
             Config.bounds.southWest.lng,
@@ -13,13 +13,14 @@
         ].join(',');
         var searchBounds = L.latLngBounds(Config.bounds.southWest, Config.bounds.northEast);
         var searching = false;
+        var sql = new cartodb.SQL({ user: Config.cartodb.user });
         var ctl = this;
 
         initialize();
 
         function initialize() {
             ctl.searchText = '';
-            ctl.suggest = Geocoder.suggest;
+            ctl.suggest = suggest;
             ctl.search = search;
 
             ctl.clearError = clearError;
@@ -27,7 +28,22 @@
             ctl.onTextKeyup = onTextKeyup;
         }
 
-        function search(searchText, magicKey, options) {
+        function suggest(suggestText) {
+            var dfd = $q.defer();
+            $q.all([
+                Geocoder.suggest(suggestText),
+                neighborhoodSuggest(suggestText)
+            ]).then(function (results) {
+                var addresses = results[0];
+                var neighborhoods = results[1];
+                dfd.resolve(neighborhoods.concat(addresses));
+            }).catch(function (error) {
+                dfd.reject(error);
+            });
+            return dfd.promise;
+        }
+
+        function search(result, options) {
             // Handles the case where use hits enter on selected typehaead entry
             // When that happens, both ng-keyup and typeahead-on-select call this function
             // If this leads to weird behaviour, consider replacing with _.debouce or _.throttle
@@ -35,28 +51,53 @@
                 return;
             }
 
-            searching = true;
-            Geocoder.search(searchText, magicKey, options)
-            .then(function (results) {
-                if (results && results.length) {
-                    var result = results[0];
-                    var latLng = L.latLng(result.feature.geometry.y, result.feature.geometry.x);
-                    if (searchBounds.contains(latLng)) {
-                        // TODO: Determine if neighborhood or address result and properly
-                        // set zoom parameter
-                        $scope.onResultFound()(latLng, Config.search.zoom.address);
+            $log.debug(result);
+            // Address result
+            if (result.magicKey !== undefined) {
+                searching = true;
+                Geocoder.search(result.text, result.magicKey, options)
+                .then(function (results) {
+                    if (results && results.length) {
+                        var result = results[0];
+                        var latLng = L.latLng(result.feature.geometry.y, result.feature.geometry.x);
+                        if (searchBounds.contains(latLng)) {
+                            $scope.onResultFound()(latLng, Config.search.zoom.address);
+                        } else {
+                            showError('No results near Philadelphia');
+                        }
                     } else {
-                        showError('No results near Philadelphia');
+                        showError('No results');
                     }
-                } else {
-                    showError('No results');
-                }
-            })
-            .catch(function (error) {
-                showError(error);
-            }).finally(function () {
-                searching = false;
+                })
+                .catch(function (error) {
+                    showError(error);
+                }).finally(function () {
+                    searching = false;
+                });
+            // Neighborhood result
+            } else if (result.centroid) {
+                var centroid = angular.fromJson(result.centroid);
+                var latLng = L.latLng(centroid.coordinates[1], centroid.coordinates[0]);
+                $scope.onResultFound()(latLng, Config.search.zoom.neighborhood);
+            } else {
+                showError('Invalid result type');
+            }
+        }
+
+        function neighborhoodSuggest(suggestText) {
+            // Wrap in angular promise for promise API consistency
+            var dfd = $q.defer();
+            var query = 'SELECT listname as text, ST_AsGeoJSON(ST_Centroid(the_geom)) as centroid ' +
+                        'FROM neighborhoods_philadelphia WHERE listname ILIKE \'%:suggestText%\' ' +
+                        'ORDER BY listname';
+            query = query.replace(':suggestText', suggestText);
+            $log.debug(query);
+            sql.execute(query).done(function (data) {
+                dfd.resolve(data.rows);
+            }).error(function (error) {
+                dfd.reject(error);
             });
+            return dfd.promise;
         }
 
         function showError(msg) {
@@ -73,7 +114,7 @@
         }
 
         function onSearchButtonClicked() {
-            search(ctl.searchText, null, {
+            search({ text: ctl.searchText, magicKey: null}, {
                 bbox: searchBBox
             });
         }
