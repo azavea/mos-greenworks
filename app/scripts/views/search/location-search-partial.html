@@ -10,6 +10,7 @@
            typeahead-on-select="search.search($item.text, $item.magicKey)"
            typeahead-wait-ms="300"
            typeahead-min-length="3" />
+    <div ng-class="{'hidden': !search.error}" class="search-error">{{ search.error }}</div>
     <span class="input-group-btn">
         <button class="btn btn-default navbar-input"
                 type="button"
@@ -17,5 +18,4 @@
             <i class="fa fa-search"></i>
         </button>
     </span>
-    <div ng-class="{'hidden': !search.error}" class="search-error">{{ search.error }}</div>
 </div>
