@@ -64,20 +64,24 @@ aside {
   }
   & > ul {
     margin-bottom: 0;
-    padding: 0 4rem;
+    padding: 0 2rem;
     & > li {
-      padding: .5rem 1rem;
       list-style: none;
       @include clearfix;
       & > a {
-        padding: 1px 3px;
+        padding: 1rem;
         color: $color-home;
+        width: 100%;
+        &:hover {
+          background-color: darken($color-sidebar, 5%);
+        }
         &:hover, &:focus, &:visited, &:active {
             color: $color-home;
+            text-decoration: none;
         }
         &.active {
-            background-color: darken($color-sidebar, 10%);
-            border-radius: 3px;
+          background-color: darken($color-sidebar, 10%);
+          border-radius: 3px;
         }
       }
     }

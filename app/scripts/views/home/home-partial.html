@@ -31,6 +31,9 @@
                         </a>
                     </li>
                 </ul>
+                <div class="button-map" ui-sref="map">
+                    Explore Map
+                </div>
             </aside>
             <main>
                 <div class="content-section">
@@ -51,15 +54,9 @@
                                 <img ng-src="/images/logo-{{ ::section.key }}.svg" alt="">
                                 {{ ::section.title }}
                             </h1>
-                            <div class="button-map circle" ui-sref="map">
-                                <i class="fa fa-arrow-right"></i>
-                            </div>
                         </div>
                     </div>
                     <ng-include src="'/scripts/views/home/sections/' + section.key + '-partial.html'"></ng-include>
-                    <div class="button-map" ui-sref="map">
-                        Explore Map
-                    </div>
                 </div>
             </main>
         </div>
