@@ -12,6 +12,7 @@
             Config.bounds.northEast.lat
         ].join(',');
         var searchBounds = L.latLngBounds(Config.bounds.southWest, Config.bounds.northEast);
+        var searching = false;
         var ctl = this;
 
         initialize();
@@ -23,9 +24,18 @@
 
             ctl.clearError = clearError;
             ctl.onSearchButtonClicked = onSearchButtonClicked;
+            ctl.onTextKeyup = onTextKeyup;
         }
 
         function search(searchText, magicKey, options) {
+            // Handles the case where use hits enter on selected typehaead entry
+            // When that happens, both ng-keyup and typeahead-on-select call this function
+            // If this leads to weird behaviour, consider replacing with _.debouce or _.throttle
+            if (searching) {
+                return;
+            }
+
+            searching = true;
             Geocoder.search(searchText, magicKey, options)
             .then(function (results) {
                 if (results && results.length) {
@@ -44,6 +54,8 @@
             })
             .catch(function (error) {
                 showError(error);
+            }).finally(function () {
+                searching = false;
             });
         }
 
@@ -64,6 +76,14 @@
             search(ctl.searchText, null, {
                 bbox: searchBBox
             });
+        }
+
+        function onTextKeyup(event) {
+            if (event.keyCode === 13) { // enter
+                search(ctl.searchText, null, {
+                    bbox: searchBBox
+                });
+            }
         }
     }
 
