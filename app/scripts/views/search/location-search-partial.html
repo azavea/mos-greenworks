@@ -6,6 +6,7 @@
            ng-model="search.searchText"
            ng-focus="search.clearError()"
            ng-blur="search.clearError()"
+           ng-keyup="search.onTextKeyup($event)"
            typeahead="location as location.text for location in search.suggest($viewValue)"
            typeahead-on-select="search.search($item.text, $item.magicKey)"
            typeahead-wait-ms="300"
