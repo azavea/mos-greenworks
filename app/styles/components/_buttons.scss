@@ -1,5 +1,5 @@
 .button-map {
-  background-color: $color-button;
+  background-color: $brand-secondary;
   padding: 2rem;
   border-radius: 4px;
   font-weight: bold;
@@ -7,6 +7,7 @@
   text-align: center;
   margin: 2rem 2rem 0;
   display: block;
+  color: #fff;;
   &.circle {
     border-radius: 100%;
     height: 6rem;
@@ -18,6 +19,6 @@
     right: 8rem;
   }
   &:hover {
-    background-color: darken($color-button, 10%);
+    background-color: darken($brand-secondary, 10%);
   }
 }
