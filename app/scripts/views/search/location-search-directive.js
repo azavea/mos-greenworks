@@ -121,7 +121,7 @@
 
         function onTextKeyup(event) {
             if (event.keyCode === 13) { // enter
-                search(ctl.searchText, null, {
+                search({ text: ctl.searchText, magicKey: null}, {
                     bbox: searchBBox
                 });
             }
