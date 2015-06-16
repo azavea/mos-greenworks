@@ -17,7 +17,7 @@
   position: relative;
   // max-height: $navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
   margin-bottom: $navbar-margin-bottom;
-  padding: 4rem 2rem;
+  padding: 5rem 2rem;
   border: 1px solid transparent;
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);;
   z-index: 1;
@@ -183,12 +183,19 @@
   > img {
     display: block;
     max-width: 100%;
-    max-width: 22rem;
     position: relative;
     top: 50%;
     -webkit-transform: translate(0, -50%);
     -ms-transform: translate(0, -50%);
     transform: translate(0, -50%);
+  }
+
+  .navbar-default & > img {
+    max-width: 18rem;
+  }
+
+  .navbar-map & > img {
+    max-width: 12rem;
   }
 
   @media (min-width: $grid-float-breakpoint) {
@@ -198,6 +205,7 @@
     }
   }
 }
+
 
 
 // Navbar toggle
