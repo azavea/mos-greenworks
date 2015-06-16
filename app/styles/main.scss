@@ -46,7 +46,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
  * Will tend to contain a lot of component files.
  */
 @import
-  "components/buttons";
+  "components/buttons",
+  "components/typeahead";
 
 /**
  * Page-specific styles.

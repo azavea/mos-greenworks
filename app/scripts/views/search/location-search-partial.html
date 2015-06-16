@@ -8,7 +8,8 @@
            ng-blur="search.clearError()"
            ng-keyup="search.onTextKeyup($event)"
            typeahead="location as location.text for location in search.suggest($viewValue)"
-           typeahead-on-select="search.search($item.text, $item.magicKey)"
+           typeahead-on-select="search.search($item)"
+           typeahead-template-url="scripts/views/search/typeahead-item-partial.html"
            typeahead-wait-ms="300"
            typeahead-min-length="3" />
     <div ng-class="{'hidden': !search.error}" class="search-error">{{ search.error }}</div>
