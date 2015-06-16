@@ -32,6 +32,12 @@
   .mode-color {
     color: $color-energy;
   }
+  .mode-background.content-header {
+    background-image:url('../images/background-energy.jpg');
+    @media all and (-webkit-min-device-pixel-ratio: 2) {
+      background-image:url('../images/background-energy@2x.jpg');
+    }
+  }
 }
 
 .mode-environment {
@@ -43,6 +49,12 @@
   }
   .mode-color {
     color: $color-environment;
+  }
+  .mode-background.content-header {
+    background-image:url('../images/background-environment.jpg');
+    @media all and (-webkit-min-device-pixel-ratio: 2) {
+      background-image:url('../images/background-environment@2x.jpg');
+    }
   }
 }
 
@@ -56,6 +68,12 @@
   .mode-color {
     color: $color-engagement;
   }
+  .mode-background.content-header {
+    background-image:url('../images/background-engagement.jpg');
+    @media all and (-webkit-min-device-pixel-ratio: 2) {
+      background-image:url('../images/background-engagement@2x.jpg');
+    }
+  }
 }
 
 .mode-equity {
@@ -68,6 +86,12 @@
   .mode-color {
     color: $color-equity;
   }
+  .mode-background.content-header {
+    background-image:url('../images/background-equity.jpg');
+    @media all and (-webkit-min-device-pixel-ratio: 2) {
+      background-image:url('../images/background-equity@2x.jpg');
+    }
+  }
 }
 
 .mode-economy {
@@ -79,5 +103,11 @@
   }
   .mode-color {
     color: $color-economy;
+  }
+  .mode-background.content-header {
+    background-image:url('../images/background-economy.jpg');
+    @media all and (-webkit-min-device-pixel-ratio: 2) {
+      background-image:url('../images/background-economy@2x.jpg');
+    }
   }
 }
