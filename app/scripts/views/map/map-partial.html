@@ -39,7 +39,8 @@
             <div class="filter-wrapper">
                 <div class="filter"
                      ng-class="'mode-{{::key | lowercase}}'"
-                     ng-repeat="(key, section) in map.categories"
+                     ng-repeat="config in map.sections"
+                     ng-init="key = config.title;"
                      ng-show="map.showCategories">
                     <div class="filter-header clearfix" ng-click="map.onHeaderClicked(key)">
                         <div class="filter-header-icon">
@@ -54,7 +55,7 @@
                         </div>
                     </div>
                     <div class="filter-body" collapse="!map.open[key]">
-                        <div class="filter-subcategory" ng-repeat="(projKey, projectCat) in section">
+                        <div class="filter-subcategory" ng-repeat="(projKey, projectCat) in map.categories[config.title]">
                             <div class="filter-subcategory-header">
                                 <div class="filter-category-checkbox">
                                     <input id="projcategory-{{$id}}"
