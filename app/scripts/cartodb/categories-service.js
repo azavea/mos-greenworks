@@ -20,7 +20,7 @@
         var iconUrl = 'https://s3.amazonaws.com/s3.azavea.com/images/gwicons/:icon.svg';
         var iconMap = {
             'Bicycle Infrastructure': 'ic_bike',
-            'IndeGo Stations': 'ic_indego4',
+            'Indego Stations': 'ic_indego4',
             'Pedestrian Space': 'ic_pedestrian',
             'SEPTA Climate Resilience': 'ic_climateResilience',
             'City LEED buildings': 'ic_leed',
@@ -217,7 +217,7 @@
                 rows.push({
                     count: 44,
                     project_category: 'Bicycle and Pedestrian Infrastructure',
-                    section: 'Economy',
+                    section: 'Equity',
                     sub_category: 'Bike Trails'
                 });
             }
