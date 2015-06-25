@@ -76,7 +76,7 @@
                                 </div>
                                 <label for="subcategory-{{$id}}">
                                     <div class="filter-subcategory-marker">
-                                        <div class="marker">
+                                        <div ng-class="{marker: map.hasBackground(subKey)}">
                                             <img ng-if="iconUrl" ng-src="{{ ::iconUrl }}">
                                         </div>
                                     </div>

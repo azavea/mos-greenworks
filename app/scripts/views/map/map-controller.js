@@ -32,6 +32,7 @@
             ctl.open = {};      // accordion toggle state
 
             ctl.iconForCategory = Categories.getIcon;
+            ctl.hasBackground = Categories.hasBackground;
 
             ctl.onProjectFilterClicked = onProjectFilterClicked;
             ctl.onSearchResult = onSearchResult;
