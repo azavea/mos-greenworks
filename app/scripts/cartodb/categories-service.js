@@ -27,7 +27,7 @@
             'SEPTA Energy Management': 'ic_energyManagement',
             'Philadelphia International Airport Renewable Energy': 'ic_airRenewable',
             'Philadelphia Water Department Renewable Energy': 'ic_pwdRenewable',
-            'Privately-Owned Solar Project': 'ic_solar',
+            'Privately-Owned Solar Project': 'ic_solar2',
             // Environment
             'Air Monitoring Station': 'ic_airMonitor',
             'Alternative Energy Vehicle Fueling Station': 'ic_altEnergy2',
