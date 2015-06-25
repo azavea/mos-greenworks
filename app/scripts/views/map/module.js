@@ -15,6 +15,7 @@
         'ui.router',
         'ui.bootstrap',
         'cartodb',
+        'gw.config',
         'gw.views.search'
     ])
     .config(StateConfig);

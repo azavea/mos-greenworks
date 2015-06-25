@@ -15,6 +15,7 @@
         'ui.router',
         'duScroll',
         'gw.affix',
+        'gw.config',
         'gw.views.search'
     ])
     .config(StateConfig)

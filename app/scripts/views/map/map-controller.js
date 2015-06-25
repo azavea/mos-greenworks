@@ -5,7 +5,7 @@
      * Controller for the gw app map view
      */
     /* ngInject */
-    function MapController($log, $timeout, $stateParams, Categories, Config, SQLFilter) {
+    function MapController($log, $timeout, $stateParams, Categories, Config, Sections, SQLFilter) {
 
         var ctl = this;
         var vis = null;
@@ -21,6 +21,7 @@
         function initialize() {
             ctl.categories = {};
             ctl.filters = [];
+            ctl.sections = Sections;
             ctl.showCategories = false;
             ctl.showFilters = true;
             ctl.toggles = {
@@ -31,6 +32,7 @@
             ctl.open = {};      // accordion toggle state
 
             ctl.iconForCategory = Categories.getIcon;
+            ctl.hasBackground = Categories.hasBackground;
 
             ctl.onProjectFilterClicked = onProjectFilterClicked;
             ctl.onSearchResult = onSearchResult;

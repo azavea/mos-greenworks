@@ -20,7 +20,9 @@
         var iconUrl = 'https://s3.amazonaws.com/s3.azavea.com/images/gwicons/:icon.svg';
         var iconMap = {
             'Bicycle Infrastructure': 'ic_bike',
-            'IndeGo Stations': 'ic_indego4',
+            'Bike Lanes': 'ic_bike_lane',
+            'Bike Trails': 'ic_bike_trail',
+            'Indego Stations': 'ic_indego4',
             'Pedestrian Space': 'ic_pedestrian',
             'SEPTA Climate Resilience': 'ic_climateResilience',
             'City LEED buildings': 'ic_leed',
@@ -38,8 +40,16 @@
             'New Supermarket': 'ic_supermarket',
             'Philadelphia Prison Orchard Project': 'ic_orchard',
             'Public Food Market': 'ic_publicFoodMarket',
-            'Green Stormwater Infrastructure': 'ic_stormwater2'
+            'Green Stormwater Infrastructure': 'ic_stormwater2',
+            'New Street Trees': 'ic_street_tree',
+            'New Yard Trees': 'ic_yard_tree'
         };
+        var noIconBackground = [
+            'Bike Lanes',
+            'Bike Trails',
+            'New Street Trees',
+            'New Yard Trees'
+        ];
 
         var categoriesList = null;
         var categoriesTree = null;
@@ -55,7 +65,8 @@
             getSubcategoryParentKey: getSubcategoryParentKey,
             allProjectKeys: allProjectKeys,
             allSubKeys: allSubKeys,
-            getKeysForCategory: getKeysForCategory
+            getKeysForCategory: getKeysForCategory,
+            hasBackground: hasBackground
         };
         return module;
 
@@ -159,6 +170,10 @@
             return keys;
         }
 
+        function hasBackground(key) {
+            return _.indexOf(noIconBackground, key) === -1;
+        }
+
         /**
          * Take the categories sql query and transform it to an object tree
          *
@@ -217,7 +232,7 @@
                 rows.push({
                     count: 44,
                     project_category: 'Bicycle and Pedestrian Infrastructure',
-                    section: 'Economy',
+                    section: 'Equity',
                     sub_category: 'Bike Trails'
                 });
             }

@@ -9,7 +9,7 @@
         debug: true,
         html5Mode: {
             enabled: false,
-            prefix: '!'
+            prefix: ''
         },
         // Visualization reference IDs used by vis-service
         ids: {
