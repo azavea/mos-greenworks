@@ -46,10 +46,10 @@
     'use strict';
 
     /* ngInject */
-    function SQLFilter($log) {
+    function SQLFilter($log, Config) {
 
         var defaults = {
-            tableName: 'master_datalist',
+            tableName: Config.cartodb.table,
             displayFields: ['*'],
             where: {
                 column: 'sub_category',
