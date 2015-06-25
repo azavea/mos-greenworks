@@ -15,46 +15,64 @@
     'use strict';
 
     /* ngInject */
-    function Categories ($log, $q) {
+    function Categories ($log, $q, Config) {
 
         var iconUrl = 'https://s3.amazonaws.com/s3.azavea.com/images/gwicons/:icon.svg';
         var iconMap = {
-            'Bicycle Infrastructure': 'ic_bike',
-            'Bike Lanes': 'ic_bike_lane',
-            'Bike Trails': 'ic_bike_trail',
-            'Indego Stations': 'ic_indego4',
-            'Pedestrian Space': 'ic_pedestrian',
-            'SEPTA Climate Resilience': 'ic_climateResilience',
-            'City LEED buildings': 'ic_leed',
-            'Energy Efficiency Projects in City-Owned Buildings': 'ic_energyEfficiency',
+            // Energy
+            'City LEED building': 'ic_leed',
             'Guaranteed Energy Savings Project': 'ic_energySavings',
-            'Greenworks Small Business Loans': 'ic_loans',
+            'Municipal Energy Efficiency Project': 'ic_energyEfficiency',
+            'Greenworks Small Business Loan': 'ic_loans',
             'SEPTA Energy Management': 'ic_energyManagement',
-            'Community Composting Sites': 'ic_composting',
-            'Air Monitoring Stations': 'ic_airMonitor',
-            'Alternative Energy Vehicle Fueling Stations': 'ic_altEnergy2',
-            'SEPTA Hybrid Bus Depots': 'ic_hybridBus',
+            'Philadelphia International Airport Renewable Energy': 'ic_airRenewable',
+            'Philadelphia Water Department Renewable Energy': 'ic_pwdRenewable',
+            'Privately-Owned Solar Project': 'ic_solar',
+            // Environment
+            'Air Monitoring Station': 'ic_airMonitor',
+            'Alternative Energy Vehicle Fueling Station': 'ic_altEnergy2',
+            'SEPTA Hybrid Bus Depot': 'ic_hybridBus',
+            'Big Belly Solar-Powered Trash Compactor/Recycling Bin': 'ic_bigBelly',
+            'Local Composting': 'ic_localComposting',
+            'Recycling Convenience Center': 'ic_recycling',
+            // Equity
             'Commercial Kitchen Center': 'ic_commercialKitchen',
-            'Farmers\' Markets': 'ic_farmersMarket',
+            'Farmers Market': 'ic_farmersMarket',
             'Food Co-op': 'ic_foodCoop',
             'New Supermarket': 'ic_supermarket',
             'Philadelphia Prison Orchard Project': 'ic_orchard',
             'Public Food Market': 'ic_publicFoodMarket',
-            'Green Stormwater Infrastructure': 'ic_stormwater2',
-            'New Street Trees': 'ic_street_tree',
-            'New Yard Trees': 'ic_yard_tree'
+            'Non-Residential Stormwater Management Project': 'ic_nonResWater',
+            'Residential Stormwater Management Project': 'ic_resWater',
+            'New Street Tree': 'ic_street_tree',
+            'New Yard Tree': 'ic_yard_tree',
+            'Ecological Restoration Site': 'ic_stream',
+            'Forest Restoration': 'ic_ecological',
+            'New Park Space': 'ic_park',
+            'Public Space': 'ic_publicSpace',
+            'Stream Restoration and Wetland Creation Project': 'ic_stormwater2',
+            'Trail': 'ic_bike_trail',
+            // Economy
+            'Bicycle Infrastructure': 'ic_bike',
+            'Bike Lane': 'ic_bike_lane',
+            'Indego Station': 'ic_indego4',
+            'Pedestrian Space': 'ic_pedestrian',
+            'SEPTA Climate Resilience': 'ic_climateResilience',
+            // Engagement
+            'Community Composting Sites': 'ic_composting'
         };
         var noIconBackground = [
-            'Bike Lanes',
-            'Bike Trails',
-            'New Street Trees',
-            'New Yard Trees'
+            Config.bikeLaneKey,
+            Config.bikeTrailKey,
+            'New Street Tree',
+            'New Yard Tree'
         ];
 
         var categoriesList = null;
         var categoriesTree = null;
         var categoriesQuery = [
-            'SELECT COUNT(*), section, project_category, sub_category FROM master_datalist',
+            'SELECT COUNT(*), section, project_category, sub_category FROM ' +
+            Config.cartodb.table + ' ',
             'GROUP BY section, project_category, sub_category',
             'ORDER BY section, project_category, sub_category'
         ].join(' ');
@@ -220,20 +238,20 @@
         // the 'master_datalist' table
         function addSpecialCases(rows) {
             /* jshint camelcase: false */
-            if (!_.find(rows, function (row) { return row.sub_category === 'Bike Lanes'; } )) {
+            if (!_.find(rows, function (row) { return row.sub_category === Config.bikeLaneKey; } )) {
                 rows.push({
                     count: 4063,
                     project_category: 'Bicycle and Pedestrian Infrastructure',
                     section: 'Economy',
-                    sub_category: 'Bike Lanes'
+                    sub_category: Config.bikeLaneKey
                 });
             }
-            if (!_.find(rows, function (row) { return row.sub_category === 'Bike Trails'; } )) {
+            if (!_.find(rows, function (row) { return row.sub_category === Config.bikeTrailKey; } )) {
                 rows.push({
                     count: 44,
                     project_category: 'Bicycle and Pedestrian Infrastructure',
                     section: 'Equity',
-                    sub_category: 'Bike Trails'
+                    sub_category: Config.bikeTrailKey
                 });
             }
             /* jshint camelcase: true */
