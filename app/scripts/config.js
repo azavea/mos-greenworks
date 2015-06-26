@@ -6,7 +6,7 @@
      * @type {Object}
      */
     var config = {
-        debug: true,
+        debug: false,
         html5Mode: {
             enabled: false,
             prefix: ''
