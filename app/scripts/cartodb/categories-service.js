@@ -55,7 +55,7 @@
             // Economy
             'Bicycle Infrastructure': 'ic_bike',
             'Bike Lane': 'ic_bike_lane',
-            'Indego Station': 'ic_indego4',
+            'Indego Bike Share Station': 'ic_indego4',
             'Pedestrian Space': 'ic_pedestrian',
             'SEPTA Climate Resilience': 'ic_climateResilience',
             // Engagement
