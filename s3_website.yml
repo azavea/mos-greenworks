@@ -1,6 +1,6 @@
 s3_id: <%= ENV['GREENWORKS_ACCESS_KEY'] %>
 s3_secret: <%= ENV['GREENWORKS_SECRET_KEY'] %>
-s3_bucket: mos-greenworks
+s3_bucket: beta.greenworksmap.com
 
 # Below are examples of all the available configurations.
 # See README for more detailed info on each of them.

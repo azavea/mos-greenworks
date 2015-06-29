@@ -5,7 +5,7 @@
      * Controller for the gw app map view
      */
     /* ngInject */
-    function MapController($log, $timeout, $stateParams, Categories, Config, SQLFilter) {
+    function MapController($log, $timeout, $stateParams, Categories, Config, Sections, SQLFilter) {
 
         var ctl = this;
         var vis = null;
@@ -13,14 +13,13 @@
         var geocodeMarker = null;
         var cdbLayer = {};
         var cdbSubLayer = {};
-        var sqlFilter = new SQLFilter({
-            tableName: 'master_datalist'
-        });
+        var sqlFilter = new SQLFilter();
         initialize();
 
         function initialize() {
             ctl.categories = {};
             ctl.filters = [];
+            ctl.sections = Sections;
             ctl.showCategories = false;
             ctl.showFilters = true;
             ctl.toggles = {
@@ -31,6 +30,7 @@
             ctl.open = {};      // accordion toggle state
 
             ctl.iconForCategory = Categories.getIcon;
+            ctl.hasBackground = Categories.hasBackground;
 
             ctl.onProjectFilterClicked = onProjectFilterClicked;
             ctl.onSearchResult = onSearchResult;
@@ -96,9 +96,9 @@
 
             // Special case for bike lanes and bike trails
             // bike lanes switch controls visibility for these layers
-            if (key === 'Bike Lanes') {
+            if (key === Config.bikeLaneKey) {
                 setSublayerVisibility(Config.cartodb.layers.bikeLanes, ctl.toggles.sub[key]);
-            } else if (key === 'Bike Trails') {
+            } else if (key === Config.bikeTrailKey) {
                 setSublayerVisibility(Config.cartodb.layers.bikeTrails, ctl.toggles.sub[key]);
             }
         }

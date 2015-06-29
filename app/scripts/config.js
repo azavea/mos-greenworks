@@ -6,21 +6,24 @@
      * @type {Object}
      */
     var config = {
-        debug: true,
+        debug: false,
         html5Mode: {
             enabled: false,
-            prefix: '!'
+            prefix: ''
         },
         // Visualization reference IDs used by vis-service
         ids: {
             tour: 'tour',
             map: 'map'
         },
+        bikeLaneKey: 'Bike Lane',
+        bikeTrailKey: 'Trail',
         cartodb: {
             user: 'greenworks',
+            table: 'database_final',
             layerId: 1,
             layers: {
-                categories: 2,
+                categories: 3,
                 bikeLanes: 1,
                 bikeTrails: 0
             }

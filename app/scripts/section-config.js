@@ -30,7 +30,7 @@
         }
     ];
 
-    angular.module('gw.views.home')
+    angular.module('gw.config')
     .constant('Sections', Sections);
 
 })();

@@ -75,7 +75,7 @@ describe('gw.cartodb: Categories', function () {
         });
 
         it('should return all bottom level keys', function () {
-            expect(_.keys(Categories.allSubKeys()).length).toEqual(24);
+            expect(_.keys(Categories.allSubKeys()).length).toEqual(25);
             // TODO: Check the actual key values?
         });
 
@@ -84,7 +84,7 @@ describe('gw.cartodb: Categories', function () {
             expect(Categories.getKeysForCategory(categoriesTree, 'New Trees')).toEqual(keysOne);
 
             // Also should work at any level
-            var keysTwo = ['Access to Healthy Food', 'Green Stormwater Infrastructure', 'New Trees'];
+            var keysTwo = ['Access to Healthy Food', 'Green Stormwater Infrastructure', 'New Trees', 'Bicycle and Pedestrian Infrastructure'];
             expect(Categories.getKeysForCategory(categoriesTree, 'Equity')).toEqual(keysTwo);
         });
 
